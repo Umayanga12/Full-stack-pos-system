@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
-const { v4: UUID } = require('uuid');
 
 const userSchema = new mongoose.Schema({
-    uuid : UUID(),
-    username : String,
-    password : String,
-    type: String
-});
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    uuid: { type: String, required: true }, // Changed from userid to uuid for clarity
+    type: { type: String, required: true } // 'admin' or 'user'
+  });
+  
 
 const user = mongoose.model("user",userSchema);
+
+module.exports = user;

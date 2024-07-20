@@ -9,6 +9,10 @@ const getBrands = async (req, res) => {
 
 const createBrand = async (req, res) => {
     const brand = new brandModel(req.body);
+    const exitingDetail = await brandModel.findOne({ name: req});
+    if (exitingDetail) {
+        return res.status(400).send({ error: 'Brand already exists' });
+    }
     await brandModel.save();
     res.status(201).send(brand);
 }

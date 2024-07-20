@@ -7,6 +7,7 @@ import userRoutes from './routers/userRouter.js';
 import brandRoutes from './routers/brandRouter.js';
 import productRoutes from './routers/productRouter.js';
 import billRoutes from './routers/billRouter.js';
+import dashRoutes from './routers/dashboardroutes.js';
 import Bill from './models/billModel.js';
 
 dotenv.config();
@@ -20,8 +21,9 @@ app.use('/user', userRoutes);
 app.use('/brand', brandRoutes);
 app.use('/bill', billRoutes);
 app.use('/product', productRoutes);
+app.use('/dashboard', dashRoutes);
 
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.DB_URL)
     .then(() => console.log('MongoDB connected'))
     .catch(error => console.error('MongoDB connection error:', error));
 
