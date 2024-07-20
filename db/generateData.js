@@ -27,6 +27,12 @@ async function run() {
             { name: 'Tablet', brand: 'Brand C', category: 'Electronics', price: 300, description: '10 inch display tablet', stock: 200 }
         ]);
 
+        await products.insertMany([
+            { brandID: 'brand1', brandName: 'Brand A', brandAgentEmail: 'brandA@mail.com', brandContact: '1234567890'},
+            { brandID: 'brand2', brandName: 'Brand B', brandAgentEmail: 'brandB@mail.com', brandContact: '1234567890'},
+            { brandID: 'brand3', brandName: 'Brand C', brandAgentEmail: 'brandC@mail.com', brandContact: '1234567890'}
+        ]);
+
         // Insert bills
         await bills.insertMany([
             {
