@@ -1,0 +1,13 @@
+{
+    "userId": "string",
+    "items": [
+      {
+        "productId": "string",
+        "content": "string",
+        "price": "number"
+      }
+    ],
+    "total": "number",
+    "date": "date"
+  }
+  
