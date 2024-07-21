@@ -66,6 +66,10 @@ export default function NavBar() {
                             <BiCategory className="mr-2 h-4 w-4" />
                             <span>Item Brands</span>
                         </CommandItem>
+                        <CommandItem className="text-white">
+                            <User className="mr-2 h-4 w-4" />
+                            <span>Users</span>
+                        </CommandItem>
                     </CommandGroup>
                 </CommandList>
             </Command>
@@ -78,7 +82,7 @@ export default function NavBar() {
                         <Settings className="mr-2 h-4 w-4" />
                         <span>Settings</span>
                     </CommandItem>
-                    <CommandItem className="text-white">
+                    <CommandItem className="text-red-300">
                         <LogOut className="mr-2 h-4 w-4" />
                         <span>Logout</span>
                     </CommandItem>

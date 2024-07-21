@@ -1,9 +1,9 @@
 import React from "react";
 
-  export function Settings() {
+export function Dashboard(){
     return(
         <div>
-            
+            <h1>Dashboard</h1>
         </div>
     );
-  }
+}
