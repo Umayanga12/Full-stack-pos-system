@@ -8,8 +8,10 @@ import { ProductAddForm } from "./add_product_form"
   
   export function AddProductLayout() {
     return (
-      <ProductList />
-    //   <ProductAddForm />
+      <div className="flex items-start gap-4">
+        <ProductList />
+        <ProductAddForm />
+      </div>
     )
   }
   
