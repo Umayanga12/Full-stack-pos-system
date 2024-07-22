@@ -13,14 +13,14 @@ export default function Home() {
       {/* <BrandPage /> */}
       {/* <Users /> */}
       {/* <Settings /> */}
-      <Dashboard />
+      {/* <Dashboard /> */}
     </div>
     // <div className="flex min-h-screen flex-col items-center justify-between p-24 pt-44">
     //   {/* <Login /> */}
     //   {/* <ProductAddForm /> */}
     //   {/* <AddProductLayout /> */}
     //   {/* <BrandPage /> */}
-    //   <Users />
+    //   {/* <Users /> */}
     //   {/* <Inventry /> */}
     //   {/* <Button variant="outline">Button</Button> */}
     // </div>
