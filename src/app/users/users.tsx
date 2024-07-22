@@ -1,6 +1,6 @@
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ExitUsers } from "./existingUser";
+import { ExitUsers } from "@/components/existingUser";
 import { ProfileForm } from "@/components/NewUser";
 
 export function Users(){

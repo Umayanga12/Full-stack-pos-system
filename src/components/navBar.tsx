@@ -82,9 +82,9 @@ export default function NavBar() {
                         <Settings className="mr-2 h-4 w-4" />
                         <span>Settings</span>
                     </CommandItem>
-                    <CommandItem className="text-red-300">
+                    <CommandItem className="text-red-400 text">
                         <LogOut className="mr-2 h-4 w-4" />
-                        <span>Logout</span>
+                        <span><b>Logout</b></span>
                     </CommandItem>
                     </CommandGroup>
                 </CommandList>

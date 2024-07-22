@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button"
 import {
     Table,
     TableBody,
@@ -9,6 +8,8 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+import { DeleteButton } from "./deletebutton"
+import { Editbutton } from "./EditButton"
   
   const invoices = [
     {
@@ -54,17 +55,16 @@ import {
       paymentMethod: "Credit Card",
     },
   ]
-  export function ProductList() {
+  
+  export function BrandDataEdit() {
     return (
-      <Table>
+      <Table className="pt-4">
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
-        <TableHeader >
-          <TableRow>
-            <TableHead className="w-[150px] text-white">Item Code</TableHead>
-            <TableHead className="text-white">Item Name</TableHead>
-            <TableHead className="text-white">Brand</TableHead>
-            <TableHead className="text-white">Stocks</TableHead>
-            <TableHead className="text-right text-white pr-10">Price</TableHead>
+        <TableHeader>
+          <TableRow >
+            <TableHead className="w-[150px]">Brand Name</TableHead>
+            <TableHead>Contact</TableHead>
+            <TableHead>Email</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -73,16 +73,19 @@ import {
               <TableCell className="font-medium">{invoice.invoice}</TableCell>
               <TableCell>{invoice.paymentStatus}</TableCell>
               <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className="text-right pr-5">{invoice.totalAmount}</TableCell>
+              <TableCell className="text-right">
+                <DeleteButton />
+                <Editbutton />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
-        <TableFooter>
+        {/* <TableFooter>
           <TableRow>
-            <TableCell className="text-right"><Button>Save Details</Button></TableCell>
+            <TableCell colSpan={3}>Total</TableCell>
+            <TableCell className="text-right">$2,500.00</TableCell>
           </TableRow>
-        </TableFooter>
+        </TableFooter> */}
       </Table>
     )
   }
