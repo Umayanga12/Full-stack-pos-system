@@ -26,6 +26,8 @@ import {
     User,
   } from "lucide-react"
 import { BiCategory } from 'react-icons/bi';
+import Link from 'next/link';
+import { BrandPage } from '@/app/brandpage';
 
 export default function NavBar() {
     return(
@@ -46,30 +48,42 @@ export default function NavBar() {
             <Command className="bg-black">
                 <CommandList>
                     <CommandGroup heading="Suggestions">
-                        <CommandItem className="text-white">
-                            <Computer   className="mr-2 h-4 w-4" />
-                            <span>Dashboard</span>
-                        </CommandItem>
-                        <CommandItem className="text-white">
-                            <CreditCard className="mr-2 h-4 w-4" />
-                            <span>Billing</span>
-                        </CommandItem>
-                        <CommandItem className="text-white">
-                            <Home className="mr-2 h-4 w-4" />
-                            <span>Inventory</span>
-                        </CommandItem>
-                        <CommandItem className="text-white">
-                            <Box className="mr-2 h-4 w-4" />
-                            <span>Add Items</span>
-                        </CommandItem>
+                        <Link href="#">
+                            <CommandItem className="text-white">
+                                <Computer   className="mr-2 h-4 w-4" />
+                                <span>Dashboard</span>
+                            </CommandItem>
+                        </Link>
+                        <Link href="#">
+                            <CommandItem className="text-white">
+                                <CreditCard className="mr-2 h-4 w-4" />
+                                <span>Billing</span>
+                            </CommandItem>
+                        </Link>
+                       <Link href="#">
+                            <CommandItem className="text-white">
+                                <Home className="mr-2 h-4 w-4" />
+                                <span>Inventory</span>
+                            </CommandItem>
+                       </Link>
+                       <Link href="./inventry/add_product">
+                            <CommandItem className="text-white">
+                                    <Box className="mr-2 h-4 w-4" />
+                                    <span>Add Items</span>
+                                </CommandItem>
+                       </Link>
+                        <Link href="#">
                         <CommandItem className="text-white">
                             <BiCategory className="mr-2 h-4 w-4" />
                             <span>Item Brands</span>
                         </CommandItem>
-                        <CommandItem className="text-white">
-                            <User className="mr-2 h-4 w-4" />
-                            <span>Users</span>
-                        </CommandItem>
+                        </Link>
+                        <Link href="#">
+                            <CommandItem className="text-white">
+                                <User className="mr-2 h-4 w-4" />
+                                <span>Users</span>
+                            </CommandItem>
+                        </Link>
                     </CommandGroup>
                 </CommandList>
             </Command>
@@ -78,14 +92,18 @@ export default function NavBar() {
             <Command className="bg-black">
                 <CommandList>
                     <CommandGroup>
+                    <Link href="./settings">
                     <CommandItem className="text-white">
                         <Settings className="mr-2 h-4 w-4" />
                         <span>Settings</span>
                     </CommandItem>
-                    <CommandItem className="text-red-400 text">
-                        <LogOut className="mr-2 h-4 w-4" />
-                        <span><b>Logout</b></span>
-                    </CommandItem>
+                    </Link>
+                    <Link href="#">
+                        <CommandItem className="text-red-400 text">
+                            <LogOut className="mr-2 h-4 w-4" />
+                            <span><b>Logout</b></span>
+                        </CommandItem>
+                    </Link>
                     </CommandGroup>
                 </CommandList>
             </Command>
