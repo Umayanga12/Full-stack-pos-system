@@ -48,7 +48,7 @@ export default function NavBar() {
             <Command className="bg-black">
                 <CommandList>
                     <CommandGroup heading="Suggestions">
-                        <Link href="#">
+                        <Link href="/dashboard">
                             <CommandItem className="text-white">
                                 <Computer   className="mr-2 h-4 w-4" />
                                 <span>Dashboard</span>
@@ -60,25 +60,25 @@ export default function NavBar() {
                                 <span>Billing</span>
                             </CommandItem>
                         </Link>
-                       <Link href="#">
+                       <Link href="/inventry">
                             <CommandItem className="text-white">
                                 <Home className="mr-2 h-4 w-4" />
                                 <span>Inventory</span>
                             </CommandItem>
                        </Link>
-                       <Link href="./inventry/add_product">
+                       <Link href="/add_product">
                             <CommandItem className="text-white">
                                     <Box className="mr-2 h-4 w-4" />
                                     <span>Add Items</span>
                                 </CommandItem>
                        </Link>
-                        <Link href="#">
+                        <Link href="brandDetail">
                         <CommandItem className="text-white">
                             <BiCategory className="mr-2 h-4 w-4" />
                             <span>Item Brands</span>
                         </CommandItem>
                         </Link>
-                        <Link href="#">
+                        <Link href="./users">
                             <CommandItem className="text-white">
                                 <User className="mr-2 h-4 w-4" />
                                 <span>Users</span>

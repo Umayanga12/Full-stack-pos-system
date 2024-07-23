@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button"
 import {AddProductLayout} from "./add_product";
 import { ProductAddForm } from "../components/add_product_form";
-import { Inventry } from "../components/inventry_dash";
-import { Login } from "./login/login";
+import { Inventry } from "./inventry_dash";
+import { Login } from "./login";
 import { BrandPage } from "./brandpage";
-import { Users } from "./users/users";
+import { Users } from "./users";
 import { Settings } from "./settings";
-import { Dashboard } from "./dashboard/dashboard";
+import { Dashboard } from "./dashboard";
 export default function Home() {
   return (
     // <div>
@@ -16,9 +16,9 @@ export default function Home() {
     //   {/* <Dashboard /> */}
     // </div>
     <div className="flex min-h-screen flex-col items-center justify-between p-24 pt-44">
-      {/* <Login /> */}
+      <Login />
       {/* <ProductAddForm /> */}
-      <AddProductLayout />
+      {/* <AddProductLayout /> */}
       {/* <BrandPage /> */}
       {/* <Users /> */}
       {/* <Inventry /> */}
