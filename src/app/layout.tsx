@@ -24,7 +24,6 @@ export default function RootLayout({
      <body
         className={`${inter.className} flex items-start justify-between`}
       >
-        <NavBar />
        <main className="w-full h-full">
         {children}
        </main>

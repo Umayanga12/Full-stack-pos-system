@@ -2,10 +2,13 @@ import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ExitUsers } from "@/components/existingUser";
 import { ProfileForm } from "@/components/NewUser";
+import NavBar from "@/components/navBar";
 
-export function Users(){
+export const Users:React.FC = () => {
     return(
-        <div className="p-4">
+        <div className="flex">
+            <NavBar/>
+            <div className="p-4">
             <Tabs defaultValue="account">
             <TabsList>
                 <TabsTrigger value="account">Excisting Users</TabsTrigger>
@@ -18,6 +21,7 @@ export function Users(){
                 <ProfileForm />
             </TabsContent>
             </Tabs>
+        </div>
         </div>
     );
 }

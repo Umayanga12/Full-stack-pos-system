@@ -9,21 +9,21 @@ import { Settings } from "./settings";
 import { Dashboard } from "./dashboard";
 export default function Home() {
   return (
-    // <div>
+    <div>
+      {/* <BrandPage /> */}
+      <Users />
+      {/* <Settings /> */}
+      {/* <Dashboard /> */}
+    </div>
+    // <div className="flex min-h-screen flex-col items-center justify-between p-24 pt-44">
+    //   {/* <Login /> */}
+    //   {/* <ProductAddForm /> */}
+    //   {/* <AddProductLayout /> */}
     //   {/* <BrandPage /> */}
     //   {/* <Users /> */}
-    //   {/* <Settings /> */}
-    //   {/* <Dashboard /> */}
+    //   {/* <Inventry /> */}
+    //   {/* <Button variant="outline">Button</Button> */}
     // </div>
-    <div className="flex min-h-screen flex-col items-center justify-between p-24 pt-44">
-      <Login />
-      {/* <ProductAddForm /> */}
-      {/* <AddProductLayout /> */}
-      {/* <BrandPage /> */}
-      {/* <Users /> */}
-      {/* <Inventry /> */}
-      {/* <Button variant="outline">Button</Button> */}
-    </div>
   );
 }
 // className="flex min-h-screen flex-col items-center justify-between p-24 pt-44"
