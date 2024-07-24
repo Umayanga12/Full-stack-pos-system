@@ -1,40 +1,60 @@
+// utils/api.ts
+require('dotenv').config()
+// Define the base URL for your API
+const BASE_URL = process.env.BASE_URL;
 
-const Newuser = async () => {
-    const Addnewuser = await fetch('');
-    if(!Addnewuser.ok){
-        throw new Error('failed to add new User');
-    } 
-    const newUser = await Addnewuser.json();
-    return newUser;
-}
+// Utility function to handle API requests
+const fetchFromApi = async (endpoint: string, options?: RequestInit) => {
+  const response = await fetch(`${BASE_URL}/${endpoint}`, options);
 
-const fetchUsers = async () => {
-    const response = await fetch('http://localhost:3020/users');
-    if (!response.ok) {
-      throw new Error('Failed to fetch users');
-    }
-    const data = await response.json();
-    return data;
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
+};
+
+// CREATE: Add a new user
+export const createUser = async (user: { name: string; email: string }) => {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
   };
 
-  
-const updateUser = async () => {
-    const response = await fetch('');
-    if(!response.ok){
-        throw new Error('Failed to Update the User detials');
-    }
+  return fetchFromApi('users', options);
+};
 
-    const data = await response.json();
-    return data;
+// READ: Fetch all users
+export const fetchUsers = async () => {
+  return fetchFromApi('users');
+};
+
+// READ: Fetch a single user by ID
+export const fetchUserById = async (id: string) => {
+  return fetchFromApi(`users/${id}`);
+};
+
+// UPDATE: Update a user by ID
+export const updateUser = async (id: string, updates: { name?: string; email?: string }) => {
+  const options = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updates),
   };
 
+  return fetchFromApi(`users/${id}`, options);
+};
 
-const DeleteUser = async () => {
-    const response = await fetch('');
-    if(!response.ok){
-        throw new Error('Failed to Delete the User');
-    }
+// DELETE: Delete a user by ID
+export const deleteUser = async (id: string) => {
+  const options = {
+    method: 'DELETE',
+  };
 
-    const data = await response.json();
-    return data;
-}
+  return fetchFromApi(`users/${id}`, options);
+};
