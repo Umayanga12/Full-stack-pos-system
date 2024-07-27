@@ -1,3 +1,4 @@
+"use client"
 import {
     Table,
     TableBody,
@@ -10,69 +11,53 @@ import {
   } from "@/components/ui/table"
 import { DeleteButton } from "./deletebutton"
 import { Editbutton } from "./EditButton"
-  
-  const invoices = [
-    {
-      invoice: "INV001",
-      paymentStatus: "Paid",
-      totalAmount: "$250.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV002",
-      paymentStatus: "Pending",
-      totalAmount: "$150.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV003",
-      paymentStatus: "Unpaid",
-      totalAmount: "$350.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV004",
-      paymentStatus: "Paid",
-      totalAmount: "$450.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV005",
-      paymentStatus: "Paid",
-      totalAmount: "$550.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV006",
-      paymentStatus: "Pending",
-      totalAmount: "$200.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV007",
-      paymentStatus: "Unpaid",
-      totalAmount: "$300.00",
-      paymentMethod: "Credit Card",
-    },
-  ]
+import { fetchFromApi } from "@/utils/Userapi";
+import React, { useState, useEffect } from "react";
+
+const fetchUserData = async () => {
+  try {
+    const data = await fetchFromApi('users');
+    console.log('Fetched data:', data); // Log the fetched data
+    // Transform data to match the desired structure
+    return data.map((user: any) => ({
+      userid: user.userid,
+      username: user.username,
+      type: user.type // Replace with actual field name
+    }));
+  } catch (error) {
+    console.error("Error fetching users data:", error);
+    return [];
+  }
+};
   
   export function DataTable() {
+    const [userData, setUserData] = useState([]);
+
+    useEffect(() => {
+      const getData = async () => {
+        const usersData = await fetchUserData();
+        setUserData(usersData);
+      };
+  
+      getData();
+    }, []);
+
     return (
       <Table className="pt-4">
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
         <TableHeader>
           <TableRow >
-            <TableHead className="w-[100px]">UserId</TableHead>
+            <TableHead className="w-[250px]">UserId</TableHead>
             <TableHead>Username</TableHead>
-            <TableHead>Password</TableHead>
+            <TableHead>Type</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
+          {userData.map((user,index) => (
+            <TableRow key={index}>
+              <TableCell className="font-medium">{user.userid}</TableCell>
+              <TableCell className="font-medium">{user.username}</TableCell>
+            <TableCell className="font-medium">{user.type}</TableCell>
               <TableCell className="text-right">
                 <DeleteButton />
                 <Editbutton />

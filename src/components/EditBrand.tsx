@@ -10,58 +10,31 @@ import {
   } from "@/components/ui/table"
 import { DeleteButton } from "./deletebutton"
 import { Editbutton } from "./EditButton"
-  
-  const invoices = [
-    {
-      invoice: "INV001",
-      paymentStatus: "Paid",
-      totalAmount: "$250.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV002",
-      paymentStatus: "Pending",
-      totalAmount: "$150.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV003",
-      paymentStatus: "Unpaid",
-      totalAmount: "$350.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV004",
-      paymentStatus: "Paid",
-      totalAmount: "$450.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV005",
-      paymentStatus: "Paid",
-      totalAmount: "$550.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV006",
-      paymentStatus: "Pending",
-      totalAmount: "$200.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV007",
-      paymentStatus: "Unpaid",
-      totalAmount: "$300.00",
-      paymentMethod: "Credit Card",
-    },
-  ]
-  
+import { fetchFromApi } from "@/utils/brandApi"
+import React, { useState, useEffect } from "react";
+
+const fethBrandData = async () => {
+  try {
+    const data = await fetchFromApi('brands');
+    return data.map((brand: any) => ({
+      brandId: brand.brandId,
+      brandName: brand.brandName,
+      contact: brand.brandContact,
+      email: brand.brandAgentEmail
+    }));
+  } catch (error) {
+    console.error("Error fetching users data:", error);
+    return [];
+  }
+}
   export function BrandDataEdit() {
+    const [brandData, setBrandData] = useState([]);
     return (
       <Table className="pt-4">
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
         <TableHeader>
           <TableRow >
+            <TableHead className="w-[150px]">Brand Id</TableHead>
             <TableHead className="w-[150px]">Brand Name</TableHead>
             <TableHead>Contact</TableHead>
             <TableHead>Email</TableHead>

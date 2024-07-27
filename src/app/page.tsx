@@ -11,8 +11,8 @@ export default function Home() {
   return (
     <div>
       {/* <BrandPage /> */}
-      <Users />
-      {/* <Settings /> */}
+      {/* <Users /> */}
+      <Settings />
       {/* <Dashboard /> */}
     </div>
     // <div className="flex min-h-screen flex-col items-center justify-between p-24 pt-44">

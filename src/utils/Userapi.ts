@@ -1,10 +1,10 @@
 // utils/api.ts
 require('dotenv').config()
 // Define the base URL for your API
-const BASE_URL = process.env.BASE_URL;
 
-// Utility function to handle API requests
-const fetchFromApi = async (endpoint: string, options?: RequestInit) => {
+const BASE_URL = "http://localhost:3020/user"; // Your base URL
+
+export const fetchFromApi = async (endpoint: string, options?: RequestInit) => {
   const response = await fetch(`${BASE_URL}/${endpoint}`, options);
 
   if (!response.ok) {
@@ -14,8 +14,9 @@ const fetchFromApi = async (endpoint: string, options?: RequestInit) => {
   return response.json();
 };
 
+
 // CREATE: Add a new user
-export const createUser = async (user: { name: string; email: string }) => {
+export const createUser = async (user: { username: string; type: string; password: string }) => {
   const options = {
     method: 'POST',
     headers: {
@@ -58,3 +59,4 @@ export const deleteUser = async (id: string) => {
 
   return fetchFromApi(`users/${id}`, options);
 };
+

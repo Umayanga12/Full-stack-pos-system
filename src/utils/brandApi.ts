@@ -3,7 +3,7 @@ require('dotenv').config();
 const BASE_URL = process.env.BASE_URL;
 
 // Utility function to handle API requests
-const fetchFromApi = async (endpoint: string, options?: RequestInit) => {
+export const fetchFromApi = async (endpoint: string, options?: RequestInit) => {
   const response = await fetch(`${BASE_URL}/${endpoint}`, options);
 
   if (!response.ok) {
