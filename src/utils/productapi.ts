@@ -1,9 +1,9 @@
 // utils/api.ts
 
-const BASE_URL = 'http://localhost:3020'; // Update with your backend URL
+const BASE_URL = 'http://localhost:3020/product'; // Update with your backend URL
 
 // Utility function to handle API requests
-const fetchFromApi = async (endpoint: string, options?: RequestInit) => {
+export const fetchFromApi = async (endpoint: string, options?: RequestInit) => {
   const response = await fetch(`${BASE_URL}/${endpoint}`, options);
 
   if (!response.ok) {

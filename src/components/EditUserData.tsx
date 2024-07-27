@@ -17,7 +17,7 @@ import React, { useState, useEffect } from "react";
 const fetchUserData = async () => {
   try {
     const data = await fetchFromApi('users');
-    console.log('Fetched data:', data); // Log the fetched data
+   // console.log('Fetched data:', data); // Log the fetched data
     // Transform data to match the desired structure
     return data.map((user: any) => ({
       userid: user.userid,
@@ -47,15 +47,14 @@ const fetchUserData = async () => {
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
         <TableHeader>
           <TableRow >
-            <TableHead className="w-[250px]">UserId</TableHead>
             <TableHead>Username</TableHead>
             <TableHead>Type</TableHead>
+            <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {userData.map((user,index) => (
             <TableRow key={index}>
-              <TableCell className="font-medium">{user.userid}</TableCell>
               <TableCell className="font-medium">{user.username}</TableCell>
             <TableCell className="font-medium">{user.type}</TableCell>
               <TableCell className="text-right">

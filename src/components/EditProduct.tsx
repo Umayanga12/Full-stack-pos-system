@@ -1,3 +1,5 @@
+"use client";
+
 import {
     Table,
     TableBody,
@@ -7,86 +9,84 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-  } from "@/components/ui/table"
-import { DeleteButton } from "./deletebutton"
-import { Editbutton } from "./EditButton"
-  
-  const invoices = [
-    {
-      invoice: "INV001",
-      paymentStatus: "Paid",
-      totalAmount: "$250.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV002",
-      paymentStatus: "Pending",
-      totalAmount: "$150.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV003",
-      paymentStatus: "Unpaid",
-      totalAmount: "$350.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV004",
-      paymentStatus: "Paid",
-      totalAmount: "$450.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV005",
-      paymentStatus: "Paid",
-      totalAmount: "$550.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV006",
-      paymentStatus: "Pending",
-      totalAmount: "$200.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV007",
-      paymentStatus: "Unpaid",
-      totalAmount: "$300.00",
-      paymentMethod: "Credit Card",
-    },
-  ]
-  
-  export function EditProduct() {
-    return (
-      <Table className="pt-4">
-        {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
-        <TableHeader>
-          <TableRow >
-            <TableHead className="w-[100px]">Invoice</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className="text-right">
-              <DeleteButton />
-              <Editbutton />
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-        {/* <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="text-right">$2,500.00</TableCell>
-          </TableRow>
-        </TableFooter> */}
-      </Table>
-    )
+} from "@/components/ui/table";
+import { DeleteButton } from "./deletebutton";
+import { fetchFromApi } from "@/utils/productapi";
+import { useState, useEffect } from "react";
+import { Editbutton } from "./EditButton";
+
+interface Product {
+    productId: string;
+    productName: string;
+    category: string;
+    price: number;
+    stock: number;
+    brand: string;
+}
+
+const fetchProductdata = async (): Promise<Product[]> => {
+  try {
+    const data = await fetchFromApi('products');
+    return data.map((product: any) => ({
+      productId: product.productId,
+      productName: product.name,
+      category: product.category,
+      price: product.price,
+      stock: product.stock,
+      brand: product.brand,
+    }));
+  } catch (error) {
+    console.error("Error fetching products data:", error);
+    return [];
   }
-  
+}
+
+export function EditProduct() {
+    const [products, setProducts] = useState<Product[]>([]);
+    
+    useEffect(() => {
+      const getData = async () => {
+        const data = await fetchProductdata();
+        console.log('Fetched data:', data);
+        setProducts(data);
+      }
+      getData();
+    }, []); // Empty dependency array to run only on mount
+
+    return (
+        <Table className="pt-4">
+            {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
+            <TableHeader>
+                <TableRow>
+                    <TableHead>Product Name</TableHead>
+                    <TableHead>Category</TableHead>
+                    <TableHead>Price</TableHead>
+                    <TableHead>Brand</TableHead>
+                    <TableHead>Stocks</TableHead>
+                    <TableHead className="text-right">Actions</TableHead> {/* Added header for actions */}
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {products.map((product, index) => (
+                    <TableRow key={index}>
+                        <TableCell>{product.productName}</TableCell>
+                        <TableCell>{product.category}</TableCell>
+                        <TableCell>{product.price}</TableCell>
+                        <TableCell>{product.brand}</TableCell>
+                        <TableCell>{product.stock}</TableCell>
+                        <TableCell className="text-right">
+                            <DeleteButton />
+                            <Editbutton />
+                        </TableCell>
+                    </TableRow>
+                ))}
+            </TableBody>
+            {/* <TableFooter>
+                <TableRow>
+                    <TableCell colSpan={3}>Total</TableCell>
+                    <TableCell className="text-right">$2,500.00</TableCell>
+                </TableRow>
+            </TableFooter> */}
+        </Table>
+    );
+}

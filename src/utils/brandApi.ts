@@ -1,6 +1,6 @@
 // utils/api.ts
 require('dotenv').config();
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL = "http://localhost:3020/brand"; // Your base URL
 
 // Utility function to handle API requests
 export const fetchFromApi = async (endpoint: string, options?: RequestInit) => {

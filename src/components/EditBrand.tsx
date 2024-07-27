@@ -1,65 +1,68 @@
+"use client";
 import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from "@/components/ui/table"
-import { DeleteButton } from "./deletebutton"
-import { Editbutton } from "./EditButton"
-import { fetchFromApi } from "@/utils/brandApi"
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import React, { useState, useEffect } from "react";
+import { DeleteButton } from "./deletebutton";
+import { Editbutton } from "./EditButton";
+import { fetchFromApi } from "@/utils/brandApi";
 
-const fethBrandData = async () => {
+const fetchBrandData = async () => {
   try {
     const data = await fetchFromApi('brands');
+    //console.log('Fetched data:', data);
     return data.map((brand: any) => ({
       brandId: brand.brandId,
       brandName: brand.brandName,
       contact: brand.brandContact,
-      email: brand.brandAgentEmail
+      email: brand.brandAgentEmail,
     }));
   } catch (error) {
     console.error("Error fetching users data:", error);
     return [];
   }
 }
-  export function BrandDataEdit() {
-    const [brandData, setBrandData] = useState([]);
-    return (
-      <Table className="pt-4">
-        {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
-        <TableHeader>
-          <TableRow >
-            <TableHead className="w-[150px]">Brand Id</TableHead>
-            <TableHead className="w-[150px]">Brand Name</TableHead>
-            <TableHead>Contact</TableHead>
-            <TableHead>Email</TableHead>
+
+export function BrandDataEdit() {
+  const [brandData, setBrandData] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await fetchBrandData();
+      setBrandData(data);
+    };
+
+    getData();
+  }, []);
+
+  return (
+    <Table className="pt-4">
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-[150px]">Brand Name</TableHead>
+          <TableHead>Contact</TableHead>
+          <TableHead>Email</TableHead>
+          <TableHead className="text-right">Actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {brandData.map((brand, index) => (
+          <TableRow key={index}>
+            <TableCell>{brand.brandName}</TableCell>
+            <TableCell>{brand.contact}</TableCell>
+            <TableCell>{brand.email}</TableCell>
+            <TableCell className="text-right">
+              <DeleteButton />
+              <Editbutton />
+            </TableCell>
           </TableRow>
-        </TableHeader>
-        <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className="text-right">
-                <DeleteButton />
-                <Editbutton />
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-        {/* <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="text-right">$2,500.00</TableCell>
-          </TableRow>
-        </TableFooter> */}
-      </Table>
-    )
-  }
-  
+        ))}
+      </TableBody>
+    </Table>
+  );
+}
