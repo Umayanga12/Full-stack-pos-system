@@ -3,7 +3,7 @@ const Controllers= require('../controllers/billController');
 
 const Billrouter = express.Router();
 
-Billrouter.post('/bills', Controllers.createBill);
+Billrouter.post('/createbills', Controllers.createBill);
 Billrouter.get('/bills', Controllers.getBills);
 Billrouter.delete('/bills/:id', Controllers.deleteBill);
 

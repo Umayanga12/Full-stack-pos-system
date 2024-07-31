@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import http from 'http';
+import cors from 'cors';
 import { Server } from 'socket.io';
 import dotenv from 'dotenv';
 import userRoutes from './routers/userRouter.js';
@@ -13,6 +14,7 @@ import Bill from './models/billModel.js';
 dotenv.config();
 
 const app = express();
+app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server);
 

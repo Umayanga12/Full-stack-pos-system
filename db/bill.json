@@ -1,5 +1,5 @@
 {
-    "userId": "string",
+    "billId": "string",
     "items": [
       {
         "productId": "string",
