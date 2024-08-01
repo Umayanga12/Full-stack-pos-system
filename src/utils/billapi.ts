@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000/bill'; // Your base URL
+const BASE_URL = 'http://localhost:3020/bill'; // Your base URL
 
 export const fetchFromApi = async (endpoint: string, options?: RequestInit) => {
   const response = await fetch(`${BASE_URL}/${endpoint}`, options);
@@ -68,8 +68,5 @@ const deleteBill = async (id: string) => {
 
 
 export{
-    createBill,
-    fetchBillById,
-    updateBill,
-    deleteBill
+    
 }

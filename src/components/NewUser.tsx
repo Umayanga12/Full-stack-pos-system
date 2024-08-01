@@ -48,7 +48,9 @@ export function ProfileForm() {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const { username, password, type } = values;
     try {
-      await createUser({ username, password, type });
+      console.log("User created successfully:", values);
+      //const result = await createUser('/register',{ username, password, type });
+      // console.log("User created successfully:", result);
       // Handle success (e.g., display a success message or redirect)
     } catch (error) {
       console.error("Error creating user:", error);
@@ -77,7 +79,16 @@ export function ProfileForm() {
           control={form.control}
           name="type"
           render={({ field }) => (
-            <Usertype {...field} />
+            <FormItem>
+              <FormLabel>User Type</FormLabel>
+              <FormControl className="pr-4">
+              <select className="border mt-3">
+              <option className="p-2"> -- Select type -- </option>
+                <option value="Admin" className="p-2">Admin</option>
+                <option value="User" className="p-2">User</option>
+              </select>
+              </FormControl>
+            </FormItem>
           )}
         />
         <FormField
@@ -106,7 +117,7 @@ export function ProfileForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Save New User</Button>
+        <Button type="submit" onClick={() => onSubmit(form.getValues())}>Save New User</Button>
       </form>
     </Form>
   );

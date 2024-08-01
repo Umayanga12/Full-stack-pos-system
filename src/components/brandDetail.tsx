@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button"
 import {
     Table,
@@ -9,60 +10,56 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+import { fetchFromApi } from "@/utils/brandApi";
+import { useState, useEffect } from "react";
   
-  const invoices = [
-    {
-      invoice: "INV001",
-      paymentStatus: "Paid",
-      totalAmount: "$250.00",
-
-    },
-    {
-      invoice: "INV002",
-      paymentStatus: "Pending",
-      totalAmount: "$150.00",
-
-    },
-    {
-      invoice: "INV003",
-      paymentStatus: "Unpaid",
-      totalAmount: "$350.00",
+  const fetchBrandData = async () => {
+    try {
+      const data = await fetchFromApi('brands');
+      //console.log('Fetched data:', data);
+      return data.map((brand: any) => ({
+        brandId: brand.brandId,
+        brandName: brand.brandName,
+        contact: brand.brandContact,
+        email: brand.brandAgentEmail,
+      }));
+    } catch (error) {
+      console.error("Error fetching users data:", error);
+      return [];
+    }
+  }
   
-    },
-    {
-      invoice: "INV004",
-      paymentStatus: "Paid",
-      totalAmount: "$450.00",
-  
-    },
-    {
-      invoice: "INV005",
-      paymentStatus: "Paid",
-      totalAmount: "$550.00",
-     
-    },
-   
-  ]
   export function BrandtList() {
+    const [brandData, setBrandData] = useState([]);
+
+    useEffect(() => {
+      const getData = async () => {
+        const data = await fetchBrandData();
+        setBrandData(data);
+      };
+
+      getData();
+    }, []);
+
     return (
       <Table>
         <TableCaption>A list of excisting Brands</TableCaption>
         <TableHeader className="bg-black">
           <TableRow>
-            <TableHead className="w-[150px] text-white">Brand Name</TableHead>
-            <TableHead className="text-white">Email</TableHead>
-            <TableHead className="text-white">Contact</TableHead>
+            <TableHead className="w-[250px] text-white">Brand Name</TableHead>
+            <TableHead className="text-white w-[250px]">Email</TableHead>
+            <TableHead className="text-white w-[250px]">Contact</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell className="text-right pr-5">{invoice.totalAmount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
+        {brandData.map((brand, index) => (
+          <TableRow key={index}>
+            <TableCell>{brand.brandName}</TableCell>
+            <TableCell>{brand.email}</TableCell>
+            <TableCell>{brand.contact}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
         
       </Table>
     )

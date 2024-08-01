@@ -41,7 +41,7 @@ export function BrandDataEdit() {
   }, []);
 
   return (
-    <Table className="pt-4">
+    <Table className="pt-4  max-w-full">
       <TableHeader>
         <TableRow>
           <TableHead className="w-[150px]">Brand Name</TableHead>

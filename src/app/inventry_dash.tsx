@@ -1,3 +1,5 @@
+"use client"
+import NavBar from "@/components/navBar"
 import {
     Table,
     TableBody,
@@ -8,76 +10,74 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+import { fetchFromApi } from "@/utils/productapi";
+import { useState, useEffect } from "react";
   
-  const invoices = [
-    {
-      invoice: "INV001",
-      paymentStatus: "Paid",
-      totalAmount: "$250.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV002",
-      paymentStatus: "Pending",
-      totalAmount: "$150.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV003",
-      paymentStatus: "Unpaid",
-      totalAmount: "$350.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV004",
-      paymentStatus: "Paid",
-      totalAmount: "$450.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV005",
-      paymentStatus: "Paid",
-      totalAmount: "$550.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV006",
-      paymentStatus: "Pending",
-      totalAmount: "$200.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV007",
-      paymentStatus: "Unpaid",
-      totalAmount: "$300.00",
-      paymentMethod: "Credit Card",
-    },
-  ]
-  
+  interface Product {
+    productId: string;
+    productName: string;
+    category: string;
+    price: number;
+    stock: number;
+    brand: string;
+}
+
+const fetchProductdata = async (): Promise<Product[]> => {
+  try {
+    const data = await fetchFromApi('products');
+    return data.map((product: any) => ({
+      productId: product.productId,
+      productName: product.name,
+      category: product.category,
+      price: product.price,
+      stock: product.stock,
+      brand: product.brand,
+    }));
+  } catch (error) {
+    console.error("Error fetching products data:", error);
+    return [];
+  }
+}
+
   export function Inventry() {
+    const [products, setProducts] = useState<Product[]>([]);
+    
+    useEffect(() => {
+      const getData = async () => {
+        const data = await fetchProductdata();
+        console.log('Fetched data:', data);
+        setProducts(data);
+      }
+      getData();
+    }, []);
     return (
-      <Table>
+      <div className="flex">
+        <div>
+          <NavBar />
+        </div>
+        <div className="p-20 min-w-screen min-h-screen">
+        <Table className="p-4 min-w-full">
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
-        <TableHeader className="bg-black">
+        <TableHeader className="bg-black ">
           <TableRow>
-            <TableHead className="w-[150px] text-white">Item Code</TableHead>
-            <TableHead className="text-white">Item Name</TableHead>
-            <TableHead className="text-white">Brand</TableHead>
-            <TableHead className="text-white">Stocks</TableHead>
-            <TableHead className="text-right text-white pr-10">Price</TableHead>
+              <TableHead className="w-[200px]">Product Name</TableHead>
+              <TableHead className="w-[200px]">Category</TableHead>
+              <TableHead className="w-[200px]">Price</TableHead>
+              <TableHead className="w-[200px]">Brand</TableHead>
+              <TableHead className="w-[200px]">Stocks</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className="text-right pr-5">{invoice.totalAmount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
+                {products.map((product, index) => (
+                    <TableRow key={index}>
+                        <TableCell>{product.productName}</TableCell>
+                        <TableCell>{product.category}</TableCell>
+                        <TableCell>${product.price.toFixed(2)}</TableCell>
+                        <TableCell>{product.brand}</TableCell>
+                        <TableCell>{product.stock}</TableCell>
+                    </TableRow>
+                ))}
+          </TableBody>
         {/* <TableFooter>
           <TableRow>
             <TableCell colSpan={3}>Total</TableCell>
@@ -85,6 +85,8 @@ import {
           </TableRow>
         </TableFooter> */}
       </Table>
+        </div>
+      </div>
     )
   }
   

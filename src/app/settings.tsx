@@ -4,10 +4,15 @@ import { DataTable } from "@/components/EditUserData";
 import { BrandDataEdit } from "@/components/EditBrand";
 import { EditProduct } from "@/components/EditProduct";
 import { EditBill } from "@/components/EditBill";
+import NavBar from "@/components/navBar";
 
 export const Settings: React.FC = () => {
   return (
-    <div className="p-4">
+    <div className="flex w-full h-full">
+      <div>
+        <NavBar />
+      </div>
+      <div className="p-4">
       <Tabs defaultValue="1">
         <TabsList>
           <TabsTrigger value="1">Edit Users</TabsTrigger>
@@ -32,6 +37,7 @@ export const Settings: React.FC = () => {
           <EditBill />
         </TabsContent>
       </Tabs>
+    </div>
     </div>
   );
 };

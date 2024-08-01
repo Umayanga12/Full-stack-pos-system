@@ -10,18 +10,19 @@ import { Dashboard } from "./dashboard";
 export default function Home() {
   return (
     <div>
-      {/* <BrandPage /> */}
+      <BrandPage />
       {/* <Users /> */}
-      <Settings />
+      {/* <Settings /> */}
       {/* <Dashboard /> */}
+      {/* <Inventry /> */}
     </div>
     // <div className="flex min-h-screen flex-col items-center justify-between p-24 pt-44">
     //   {/* <Login /> */}
     //   {/* <ProductAddForm /> */}
-    //   {/* <AddProductLayout /> */}
+    //   {/*  */}
     //   {/* <BrandPage /> */}
     //   {/* <Users /> */}
-    //   {/* <Inventry /> */}
+      
     //   {/* <Button variant="outline">Button</Button> */}
     // </div>
   );

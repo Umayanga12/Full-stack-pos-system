@@ -14,20 +14,29 @@ export const fetchFromApi = async (endpoint: string, options?: RequestInit) => {
 };
 
 // CREATE: Add a new brand
-export const createBrand = async (brand: {
-  brandName: string;
-  brandAgentEmail: string;
-  brandContact: string;
+export const createBrand = async (endpoint: string, brand: {
+  brandName: string,
+  brandAgentEmail: string,
+  brandContact: number
 }) => {
-  const options = {
+ // console.log('Starting request to:', `${BASE_URL}/${endpoint}`);
+  //console.log('Brand data:', brand);
+  const response = await fetch(`${BASE_URL}/${endpoint}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(brand),
-  };
+  });
 
-  return fetchFromApi('brands', options);
+  console.log('Response status:', response.status);
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || 'Failed to add brand data');
+  }
+
+  return response.json();
 };
 
 // READ: Fetch all brands

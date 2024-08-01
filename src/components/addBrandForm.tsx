@@ -1,6 +1,6 @@
-import React from "react";
-
-import { Button } from "@/components/ui/button"
+"use client"
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,39 +8,83 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { createBrand } from "@/utils/brandApi"; // Adjust the import path as needed
 
+export function BrandAddForm() {
+  const [brandName, setBrandName] = useState("");
+  const [email, setEmail] = useState("");
+  const [contact, setContact] = useState("");
 
-export function BrandAddForm(){
-    return(
-        <Card className="w-[350px]">
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const brandData = {
+      brandName: brandName,
+      brandAgentEmail: email,
+      brandContact: parseInt(contact)
+    };
+
+    try {
+      //console.log(brandData);
+      const response = await createBrand('createbrands',brandData);
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Brand added successfully:", result);
+        // Optionally, you could reset the form or show a success message
+      } else {
+        throw new Error("Failed to add brand details");
+      }
+    } catch (error) {
+      console.error("Error adding brand:", error);
+      // Optionally, show an error message to the user
+    }
+  };
+
+  return (
+    <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>Add Brand</CardTitle>
         <CardDescription>Add New Brand Details</CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="name">Brand Name</Label>
-              <Input id="brandname" placeholder="Brand Name" />
+              <Label htmlFor="brandname">Brand Name</Label>
+              <Input
+                id="brandname"
+                placeholder="Brand Name"
+                value={brandName}
+                onChange={(e) => setBrandName(e.target.value)}
+              />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="password">Email</Label>
-              <Input id="password" placeholder="Email" />
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="password">Contact</Label>
-              <Input id="password" placeholder="Contact" />
+              <Label htmlFor="contact">Contact</Label>
+              <Input
+                id="contact"
+                placeholder="Contact"
+                value={contact}
+                onChange={(e) => setContact(e.target.value)}
+              />
             </div>
           </div>
+          <CardFooter className="flex justify-between text-right">
+            <Button type="submit" onClick={handleSubmit}>Add Details</Button>
+          </CardFooter>
         </form>
       </CardContent>
-      <CardFooter className="flex justify-between text-right">
-        <Button>Add Details</Button>
-      </CardFooter>
     </Card>
-    );
+  );
 }

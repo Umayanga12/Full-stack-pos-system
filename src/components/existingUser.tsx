@@ -42,15 +42,15 @@ export function ExitUsers() {
     <Table>
       <TableHeader className="bg-black">
         <TableRow>
-          <TableHead className="w-[150px] text-white">Username</TableHead>
-          <TableHead className="text-white">Type</TableHead>
+          <TableHead className="w-[200px] text-white text-center">Username</TableHead>
+          <TableHead className="w-[200px] text-white text-center">Type</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {userData.map((user, index) => (
           <TableRow key={index}>
-            <TableCell className="font-medium">{user.username}</TableCell>
-            <TableCell className="text-right pr-5">{user.type}</TableCell>
+            <TableCell className="font-medium justify-between items-center text-center">{user.username}</TableCell>
+            <TableCell className="justify-between items-center text-center">{user.type}</TableCell>
           </TableRow>
         ))}
       </TableBody>

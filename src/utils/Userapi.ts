@@ -15,18 +15,22 @@ export const fetchFromApi = async (endpoint: string, options?: RequestInit) => {
 };
 
 
-// CREATE: Add a new user
-export const createUser = async (user: { username: string; type: string; password: string }) => {
-  const options = {
+export async function createUser(endpoint: string, user: { username: string; type: string; password: string }) {
+  const response = await fetch(`${BASE_URL}/${endpoint}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(user),
-  };
+  });
 
-  return fetchFromApi('users', options);
-};
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || 'Failed to create user');
+  }
+
+  return response.json();
+}
 
 // READ: Fetch all users
 export const fetchUsers = async () => {
