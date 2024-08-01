@@ -1,11 +1,24 @@
 const mongoose = require('mongoose');
-const {v4: uuidv4} = require('uuid');
+const { v4: uuidv4 } = require('uuid');
+
 const BrandDetails = new mongoose.Schema({
-    // brandID: uuidv4,
-    brandName: String,
-    brandAgentEmail: String,
-    brandContact: Number,
+    brandID: {
+        type: String,
+        default: uuidv4,
+    },
+    brandName: {
+        type: String,
+        required: true,
+    },
+    brandAgentEmail: {
+        type: String,
+        required: true,
+    },
+    brandContact: {
+        type: Number,
+        required: true,
+    },
 });
 
-const Brand = mongoose.model("brand",BrandDetails);
-module.exports = Brand;
+const brandModel = mongoose.model("brandModel", BrandDetails);
+module.exports = brandModel;

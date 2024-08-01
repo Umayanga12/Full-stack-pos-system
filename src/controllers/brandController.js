@@ -1,4 +1,4 @@
-import brandModel from "../models/brandModel";
+import brandModel from '../models/brandModel.js'
 
 require("dotenv").config();
 
@@ -8,16 +8,22 @@ const getBrands = async (req, res) => {
 }
 
 const createBrand = async (req, res) => {
+    console.log("create brand controller called ");
     try {
-        const brand = new brandModel(req.body);
-        const existingDetail = await brandModel.findOne({ name: req.body.name });
+        const Brand = new brandModel(req.body);
+        //console.log(Brand); 
+        const existingDetail = await brandModel.findOne({brandName: req.body.brandName});
+        //console.log(req.body.brandName)
+        //console.log(existingDetail);
         if (existingDetail) {
+            //console.log(existingDetail);
             return res.status(400).send({ error: 'Brand already exists' });
         }
-        await brand.save();
-        res.status(201).send(brand);
+        //console.log(Brand);
+        await Brand.save();
+        res.status(201).send("SuccessFully added");
     } catch (error) {
-        res.status(500).send({ error: 'Something went wrong' });
+        res.status(500).send({ error: 'Something went wrong', details: error.message });
     }
 };
 
