@@ -5,7 +5,6 @@ const BASE_URL = "http://localhost:3020/brand"; // Your base URL
 // Utility function to handle API requests
 export const fetchFromApi = async (endpoint: string, options?: RequestInit) => {
   const response = await fetch(`${BASE_URL}/${endpoint}`, options);
-
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }

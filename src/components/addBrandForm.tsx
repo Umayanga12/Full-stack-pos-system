@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -29,11 +29,15 @@ export function BrandAddForm() {
 
     try {
       //console.log(brandData);
-      const response = await createBrand('createbrands',brandData);
+      const response = await createBrand('createbrands', brandData);
       if (response.ok) {
         const result = await response.json();
         console.log("Brand added successfully:", result);
-        // Optionally, you could reset the form or show a success message
+        
+        // Clear the form fields
+        setBrandName("");
+        setEmail("");
+        setContact("");
       } else {
         throw new Error("Failed to add brand details");
       }
@@ -80,8 +84,8 @@ export function BrandAddForm() {
               />
             </div>
           </div>
-          <CardFooter className="flex justify-between text-right">
-            <Button type="submit" onClick={handleSubmit}>Add Details</Button>
+          <CardFooter className="flex justify-between text-right pt-4">
+            <Button type="submit">Add Details</Button>
           </CardFooter>
         </form>
       </CardContent>

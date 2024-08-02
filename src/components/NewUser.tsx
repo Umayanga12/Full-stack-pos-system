@@ -13,8 +13,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Usertype } from "./usertype";
 import { createUser } from "@/utils/Userapi";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -49,9 +55,8 @@ export function ProfileForm() {
     const { username, password, type } = values;
     try {
       console.log("User created successfully:", values);
-      //const result = await createUser('/register',{ username, password, type });
-      // console.log("User created successfully:", result);
-      // Handle success (e.g., display a success message or redirect)
+      const result = await createUser('/register',{ username, password, type });
+      //console.log("User created successfully:", result);
     } catch (error) {
       console.error("Error creating user:", error);
       // Handle error (e.g., display an error message)
@@ -82,12 +87,20 @@ export function ProfileForm() {
             <FormItem>
               <FormLabel>User Type</FormLabel>
               <FormControl className="pr-4">
-              <select className="border mt-3">
-              <option className="p-2"> -- Select type -- </option>
-                <option value="Admin" className="p-2">Admin</option>
-                <option value="User" className="p-2">User</option>
-              </select>
+                <Select 
+                  value={field.value}
+                  onValueChange={field.onChange}
+                >
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="User Type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Admin">Admin</SelectItem>
+                    <SelectItem value="User">User</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -117,7 +130,7 @@ export function ProfileForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" onClick={() => onSubmit(form.getValues())}>Save New User</Button>
+        <Button type="submit">Save New User</Button>
       </form>
     </Form>
   );
