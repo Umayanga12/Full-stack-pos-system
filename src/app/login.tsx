@@ -14,10 +14,10 @@ import { Label } from "@/components/ui/label"
 
 export function Login() {
   return (
-    <Card className="w-[350px]">
-      <CardHeader>
+    <Card className="w-[350px] bg-slate-500">
+      <CardHeader className="ml-2">
         <CardTitle>Login</CardTitle>
-        <CardDescription>Welcome Back</CardDescription>
+        <CardDescription className="text-black">Welcome Back</CardDescription>
       </CardHeader>
       <CardContent>
         <form>

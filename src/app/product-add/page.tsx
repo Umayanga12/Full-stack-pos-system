@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/form";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
-import NavBar from "../components/navBar";
+import NavBar from "@/components/NavBar";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { createBrand, fetchBrands } from "@/utils/brandApi";
@@ -46,7 +46,7 @@ const formSchema = z.object({
   path: ["stocks"],
 });
 
-export function ProductAddForm() {
+const ProductAddForm: React.FC = () =>{
   const [brands, setBrands] = useState([]);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -168,3 +168,6 @@ export function ProductAddForm() {
     </div>
   );
 }
+
+
+export default ProductAddForm;

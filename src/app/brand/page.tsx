@@ -1,11 +1,10 @@
 import { BrandAddForm } from "@/components/addBrandForm";
 import { BrandtList } from "@/components/brandDetail";
-import NavBar from "@/components/navBar";
-import { NewBrandtList } from "@/components/newbrandDetail";
+import NavBar from "@/components/NavBar";
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-export function BrandPage(){
+const BrandPage: React.FC = () =>{
     return(
         <div className="flex items-start justify-start gap-2 rounded-[8px]">
             <div>
@@ -36,3 +35,5 @@ export function BrandPage(){
         </div>
     )
 }
+
+export default BrandPage;   

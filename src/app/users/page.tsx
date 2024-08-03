@@ -2,9 +2,9 @@ import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ExitUsers } from "@/components/existingUser";
 import { ProfileForm } from "@/components/NewUser";
-import NavBar from "@/components/navBar";
+import NavBar from "@/components/NavBar";
 
-export function Users() {
+const Users : React.FC = () =>{
     return(
         <div className="flex">
             <NavBar/>
@@ -25,3 +25,6 @@ export function Users() {
         </div>
     );
 }
+
+
+export default Users;

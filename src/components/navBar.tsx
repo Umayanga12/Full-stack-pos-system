@@ -20,22 +20,22 @@ const NavBar: React.FC = () => {
                 <Command className="bg-black">
                     <CommandList>
                         <CommandGroup heading="Suggestions">
-                            <Link href="../app/dashboard.tsx">
+                        <Link href="/dashboard">
                                 <CommandItem className="text-white">
                                     <Computer className="mr-2 h-4 w-4" />
                                     <span>Dashboard</span>
                                 </CommandItem>
                             </Link>
-                            <Link href="/bill">
+                            <Link href="/bill-page">
                                 <CommandItem className="text-white">
                                     <CreditCard className="mr-2 h-4 w-4" />
                                     <span>Billing</span>
                                 </CommandItem>
                             </Link>
-                            <Link href="/inventory">
+                            <Link href="/inventry">
                                 <CommandItem className="text-white">
                                     <Home className="mr-2 h-4 w-4" />
-                                    <span>Inventory</span>
+                                    <span>Inventry</span>
                                 </CommandItem>
                             </Link>
                             <Link href="/product-add">
@@ -44,7 +44,7 @@ const NavBar: React.FC = () => {
                                     <span>Add Items</span>
                                 </CommandItem>
                             </Link>
-                            <Link href="/brands">
+                            <Link href="/brand">
                                 <CommandItem className="text-white">
                                     <BiCategory className="mr-2 h-4 w-4" />
                                     <span>Item Brands</span>

@@ -1,5 +1,6 @@
 "use client"
-import NavBar from "@/components/navBar"
+import React from "react";
+import NavBar from "@/components/NavBar"
 import {
     Table,
     TableBody,
@@ -39,7 +40,7 @@ const fetchProductdata = async (): Promise<Product[]> => {
   }
 }
 
-  export function Inventry() {
+const Inventry: React.FC = () =>{
     const [products, setProducts] = useState<Product[]>([]);
     
     useEffect(() => {
@@ -56,6 +57,7 @@ const fetchProductdata = async (): Promise<Product[]> => {
           <NavBar />
         </div>
         <div className="p-20 min-w-screen min-h-screen">
+          <h1  className="font-bold text-3xl p-4">Inventry</h1>
         <Table className="p-4 min-w-full">
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
         <TableHeader className="bg-black ">
@@ -78,15 +80,11 @@ const fetchProductdata = async (): Promise<Product[]> => {
                     </TableRow>
                 ))}
           </TableBody>
-        {/* <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="text-right">$2,500.00</TableCell>
-          </TableRow>
-        </TableFooter> */}
       </Table>
         </div>
       </div>
     )
   }
   
+
+export default Inventry;

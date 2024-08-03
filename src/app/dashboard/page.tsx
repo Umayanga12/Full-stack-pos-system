@@ -2,10 +2,10 @@
 import React from 'react';
 import { ChartComponent } from '@/components/BillChart';
 import { ProductCharComponent } from '@/components/ProductChart';
-import NavBar from '@/components/navBar';
+import NavBar from '@/components/NavBar';
  // Ensure the correct path if NavBar is used
 
-export function Dashboard(){
+const Dashboard: React.FC = () =>{
   return (
     <div className="flex">
       <NavBar/> {/* Include NavBar if it is part of the dashboard layout */}
