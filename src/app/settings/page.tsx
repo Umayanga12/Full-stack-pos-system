@@ -5,7 +5,7 @@ import { DataTable } from "@/components/EditUserData";
 import { BrandDataEdit } from "@/components/EditBrand";
 import { EditProduct } from "@/components/EditProduct";
 import { EditBill } from "@/components/EditBill";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/navBar";
 
 export const Settings: React.FC = () => {
   return (

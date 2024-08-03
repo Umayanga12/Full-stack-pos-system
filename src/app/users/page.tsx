@@ -2,7 +2,7 @@ import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ExitUsers } from "@/components/existingUser";
 import { ProfileForm } from "@/components/NewUser";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/navBar";
 
 const Users : React.FC = () =>{
     return(

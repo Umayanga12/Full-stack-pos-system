@@ -1,11 +1,23 @@
 'use client';
+import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { BiCategory } from 'react-icons/bi';
 import { ShoppingCart, Computer, CreditCard, Home, Box, User, Settings, LogOut } from 'lucide-react';
 import UserItem from './UserItem';
 import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
+import { Button } from './ui/button';
 
 const NavBar: React.FC = () => {
+    const router = useRouter();
+
+    const handleLogout = () => {
+        // Perform any necessary logout logic here (e.g., clearing auth tokens)
+
+        // Redirect to login page
+        router.push('/login');
+    };
+
     return (
         <div className="w-[300px] border-r min-w-300 flex flex-col min-h-screen bg-black text-white p-4 gap-2">
             <div className="justify-between items-center text-center flex flex-col">
@@ -20,7 +32,7 @@ const NavBar: React.FC = () => {
                 <Command className="bg-black">
                     <CommandList>
                         <CommandGroup heading="Suggestions">
-                        <Link href="/dashboard">
+                            <Link href="/dashboard">
                                 <CommandItem className="text-white">
                                     <Computer className="mr-2 h-4 w-4" />
                                     <span>Dashboard</span>
@@ -71,12 +83,7 @@ const NavBar: React.FC = () => {
                                 <span>Settings</span>
                             </CommandItem>
                         </Link>
-                        <Link href="/logout">
-                            <CommandItem className="text-red-400">
-                                <LogOut className="mr-2 h-4 w-4" />
-                                <span><b>Logout</b></span>
-                            </CommandItem>
-                        </Link>
+                        <Button variant="outline" className='bg-red-500 m-2 hover:bg-red-500' onClick={handleLogout}>Logout</Button>
                     </CommandGroup>
                 </CommandList>
             </Command>

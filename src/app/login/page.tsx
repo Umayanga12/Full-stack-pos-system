@@ -52,9 +52,7 @@ const Login: React.FC = () => {
       });
 
       if (response.ok) {
-        console.log("Authenticated");
-        // Optionally, you can redirect to another page after successful login
-        // window.location.href = '/some-page'; // Use this if you want to redirect
+        //console.log("Authenticated");
         window.location.href = '/dashboard'
       } else {
         const errorData = await response.json();
@@ -67,7 +65,8 @@ const Login: React.FC = () => {
   };
 
   return (
-    <Card className="w-[350px] bg-blue-200">
+    <div  className="flex min-h-screen flex-col items-center justify-between p-24 pt-44">
+      <Card className="w-[350px] bg-blue-200">
       <CardHeader>
         <CardTitle>Login</CardTitle>
         <CardDescription>Welcome Back</CardDescription>
@@ -96,12 +95,13 @@ const Login: React.FC = () => {
             </div>
             {error && <p className="text-red-500">{error}</p>}
           </div>
-          <CardFooter className="flex justify-between">
+          <CardFooter className="flex justify-between pt-4">
             <Button type="submit" className="w-full">Login</Button>
           </CardFooter>
         </form>
       </CardContent>
     </Card>
+    </div>
   );
 }
 

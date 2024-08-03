@@ -1,6 +1,6 @@
 import { BrandAddForm } from "@/components/addBrandForm";
 import { BrandtList } from "@/components/brandDetail";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/navBar";
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 

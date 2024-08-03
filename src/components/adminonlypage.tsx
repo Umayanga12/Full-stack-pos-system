@@ -1,4 +1,4 @@
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/navBar";
 import React from "react";
 
 export function Adminonly(){
