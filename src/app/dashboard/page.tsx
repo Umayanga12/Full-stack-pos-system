@@ -10,7 +10,7 @@ const Dashboard: React.FC = () =>{
     <div className="flex">
       <NavBar/> {/* Include NavBar if it is part of the dashboard layout */}
       <div className="p-8">
-        <h1 className="font-bold text-3xl">Dashboard</h1>
+        <h1 className="font-bold text-3xl p-4">Dashboard</h1>
         <div className="flex gap-5 pl-10">
           <div>
             <ChartComponent />

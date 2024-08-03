@@ -73,11 +73,12 @@ const ProductAddForm: React.FC = () =>{
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const { productName, brand, stocks, price } = values;
+
     try {
       //console.log("Product created successfully:", values);
 
-      const result = await createBrand('/createbrands',values);
-      console.log("Product created successfully:", result);
+      // const result = await createBrand('/createbrands',values);
+      // console.log("Product created successfully:", result);
       
       // Handle success (e.g., display a success message or redirect)
     } catch (error) {
