@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/form";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
-import NavBar from "./navBar";
+import NavBar from "../components/navBar";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { createBrand, fetchBrands } from "@/utils/brandApi";

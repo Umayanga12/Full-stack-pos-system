@@ -4,7 +4,7 @@ import { ExitUsers } from "@/components/existingUser";
 import { ProfileForm } from "@/components/NewUser";
 import NavBar from "@/components/navBar";
 
-export const Users:React.FC = () => {
+export function Users() {
     return(
         <div className="flex">
             <NavBar/>

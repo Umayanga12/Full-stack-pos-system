@@ -5,7 +5,7 @@ import { ProductCharComponent } from '@/components/ProductChart';
 import NavBar from '@/components/navBar';
  // Ensure the correct path if NavBar is used
 
-export const Dashboard: React.FC = () => {
+export function Dashboard(){
   return (
     <div className="flex">
       <NavBar/> {/* Include NavBar if it is part of the dashboard layout */}
