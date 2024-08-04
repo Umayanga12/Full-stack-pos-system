@@ -1,12 +1,13 @@
-"use client";
+"use client"
 
+import { useState, useEffect } from "react";
 import { TrendingUp } from "lucide-react";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from "recharts";
+
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -16,77 +17,83 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { fetchFromApi } from "@/utils/productapi";
 
-const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
-];
+interface Product {
+  productName: string;
+  stock: number;
+}
+
+const fetchProductdata = async (): Promise<Product[]> => {
+  try {
+    const data = await fetchFromApi('products');
+    return data.map((product: any) => ({
+      productName: product.productName,
+      stock: product.stock,
+    }));
+  } catch (error) {
+    console.error("Error fetching products data:", error);
+    return [];
+  }
+}
 
 const chartConfig = {
   desktop: {
-    label: "Desktop",
+    label: "Stock remaining",
     color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig;
 
 export function ChartComponent() {
+  const [productData, setProductData] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await fetchProductdata();
+      setProductData(data);
+    };
+
+    getData();
+  }, []);
+
   return (
-    <Card  style={{ width: "38vw", height: "50vh" }}>
+    <Card className="w-[750px]">
       <CardHeader>
-        <CardTitle>Area Chart - Linear</CardTitle>
-        <CardDescription>
-          Showing total visitors for the last 6 months
-        </CardDescription>
+        <CardTitle>Stock Details</CardTitle>
+        <CardDescription>Remaining stocks Details</CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} style={{ width: "35vw", height: "35vh" }}>
-          <AreaChart
+        <ChartContainer config={chartConfig}>
+          <BarChart
             accessibilityLayer
-            data={chartData}
+            data={productData}
             margin={{
-              left: 12,
-              right: 12,
+              top: 20,
             }}
-            style={{ width: "100%", height: "100%" }}
           >
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="month"
+              dataKey="productName"
               tickLine={false}
+              tickMargin={10}
               axisLine={false}
-              tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
             />
+            <YAxis />
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent indicator="dot" hideLabel />}
+              content={<ChartTooltipContent hideLabel />}
             />
-            <Area
-              dataKey="desktop"
-              type="linear"
-              fill="var(--color-desktop)"
-              fillOpacity={0.4}
-              stroke="var(--color-desktop)"
-            />
-          </AreaChart>
+            <Bar dataKey="stock" fill="var(--color-desktop)" radius={8}>
+              <LabelList
+                position="top"
+                offset={12}
+                className="fill-foreground"
+                fontSize={12}
+              />
+            </Bar>
+          </BarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter>
-        <div className="flex w-full items-start gap-2 text-sm">
-          <div className="grid gap-2">
-            <div className="flex items-center gap-2 font-medium leading-none">
-              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-            </div>
-            <div className="flex items-center gap-2 leading-none text-muted-foreground">
-              January - June 2024
-            </div>
-          </div>
-        </div>
-      </CardFooter>
     </Card>
   );
 }

@@ -72,8 +72,8 @@ const NavBar: React.FC = () => {
                     </CommandList>
                 </Command>
             </div>
+            <div className='p-7'></div>
             <div className='pt-60 border-b'></div>
-            <UserItem />
             <Command className="bg-black">
                 <CommandList>
                     <CommandGroup>

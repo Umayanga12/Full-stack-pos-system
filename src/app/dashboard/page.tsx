@@ -1,8 +1,8 @@
 // pages/dashboard.tsx
 import React from 'react';
 import { ChartComponent } from '@/components/BillChart';
-import { ProductCharComponent } from '@/components/ProductChart';
 import NavBar from '@/components/navBar';
+
  // Ensure the correct path if NavBar is used
 
 const Dashboard: React.FC = () =>{
@@ -15,10 +15,10 @@ const Dashboard: React.FC = () =>{
           <div>
             <ChartComponent />
           </div>
-          <div>
-            <ProductCharComponent />
-          </div>
         </div>
+      </div>
+      <div>
+
       </div>
     </div>
   );
