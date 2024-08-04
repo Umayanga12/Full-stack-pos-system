@@ -35,7 +35,7 @@ const Login: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    
+
     const validationResult = formSchema.safeParse({ username, password });
     if (!validationResult.success) {
       setError(validationResult.error.errors[0].message);
@@ -66,7 +66,7 @@ const Login: React.FC = () => {
 
   return (
     <div  className="flex min-h-screen flex-col items-center justify-between p-24 pt-44">
-      <Card className="w-[350px] bg-blue-200">
+      <Card className="w-[350px] bg-slate-300">
       <CardHeader>
         <CardTitle>Login</CardTitle>
         <CardDescription>Welcome Back</CardDescription>

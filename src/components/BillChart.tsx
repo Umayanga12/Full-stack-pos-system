@@ -57,7 +57,7 @@ export function ChartComponent() {
   }, []);
 
   return (
-    <Card className="w-[750px]">
+    <Card className="w-[900px]">
       <CardHeader>
         <CardTitle>Stock Details</CardTitle>
         <CardDescription>Remaining stocks Details</CardDescription>
