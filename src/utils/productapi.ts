@@ -15,11 +15,9 @@ export const fetchFromApi = async (endpoint: string, options?: RequestInit) => {
 
 // CREATE: Add a new product
 export const createProduct = async (product: {
-  name: string;
+  productName: string;
   brand: string;
-  category: string;
   price: number;
-  description: string;
   stock: number;
 }) => {
   const options = {

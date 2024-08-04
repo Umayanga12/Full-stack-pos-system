@@ -13,7 +13,7 @@ import {
   } from "@/components/ui/table"
 import { fetchFromApi } from "@/utils/productapi";
 import { useState, useEffect } from "react";
-  
+
   interface Product {
     productId: string;
     productName: string;
@@ -26,9 +26,10 @@ import { useState, useEffect } from "react";
 const fetchProductdata = async (): Promise<Product[]> => {
   try {
     const data = await fetchFromApi('products');
+   // console.log(data)
     return data.map((product: any) => ({
       productId: product.productId,
-      productName: product.name,
+      productName: product.productName,
       category: product.category,
       price: product.price,
       stock: product.stock,
@@ -42,7 +43,7 @@ const fetchProductdata = async (): Promise<Product[]> => {
 
 const Inventry: React.FC = () =>{
     const [products, setProducts] = useState<Product[]>([]);
-    
+
     useEffect(() => {
       const getData = async () => {
         const data = await fetchProductdata();
@@ -63,7 +64,6 @@ const Inventry: React.FC = () =>{
         <TableHeader className="bg-black ">
           <TableRow>
               <TableHead className="w-[200px]">Product Name</TableHead>
-              <TableHead className="w-[200px]">Category</TableHead>
               <TableHead className="w-[200px]">Price</TableHead>
               <TableHead className="w-[200px]">Brand</TableHead>
               <TableHead className="w-[200px]">Stocks</TableHead>
@@ -73,7 +73,6 @@ const Inventry: React.FC = () =>{
                 {products.map((product, index) => (
                     <TableRow key={index}>
                         <TableCell>{product.productName}</TableCell>
-                        <TableCell>{product.category}</TableCell>
                         <TableCell>${product.price.toFixed(2)}</TableCell>
                         <TableCell>{product.brand}</TableCell>
                         <TableCell>{product.stock}</TableCell>
@@ -85,6 +84,6 @@ const Inventry: React.FC = () =>{
       </div>
     )
   }
-  
+
 
 export default Inventry;
