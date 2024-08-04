@@ -7,8 +7,8 @@ const getProducts = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
-    const product = new Product(req.body);
-    await productModel.save();
+    const product = new productModel(req.body);
+    await product.save();
     res.status(201).send(product);
 };
 
