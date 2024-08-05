@@ -1,50 +1,48 @@
-"use client"
+"use client";
 
 import React from "react";
 import {
     Table,
     TableBody,
-    TableCaption,
+    TableHead,
+    TableRow,
     TableCell,
     TableFooter,
-    TableHead,
     TableHeader,
-    TableRow,
-  } from "@/components/ui/table"
+} from "@/components/ui/table";
 import { Button } from "./ui/button";
-export default function BillPageList(){
-  return (
-    <div>
-       <Table>
-                    <TableCaption>A list of Bill item items.</TableCaption>
-                    <TableHeader>
-                        <TableRow>
-                        <TableHead className="w-[100px]">Item</TableHead>
-                        <TableHead>Count</TableHead>
-                        <TableHead>Unit Price</TableHead>
-                        <TableHead className="text-right">Amount</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        <TableRow>
-                        <TableCell className="font-medium">INV001</TableCell>
-                        <TableCell>Paid</TableCell>
-                        <TableCell>Credit Card</TableCell>
-                        <TableCell className="text-right">$250.00</TableCell>
-                        </TableRow>
-                    </TableBody>
-                    <TableFooter>
-                        <TableRow>
-                        <TableCell colSpan={3} className="text-right">Total</TableCell>
-                        <TableCell className="text-right">$250.00</TableCell>
-                        </TableRow>
-                        <TableRow>
-                        <TableCell className="text-right">
-                          <Button>Make Payment</Button>
-                        </TableCell>
-                        </TableRow>
-                    </TableFooter>
-                </Table>
-    </div>
-  );
-};
+
+interface BillItem {
+    productname: string;
+    count: number;
+    price: number;
+}
+
+interface BillPageListProps {
+    billItems: BillItem[];
+    total: number;
+}
+
+export default function BillPageList({ billItems = [], total = 0 }: BillPageListProps) {
+    return (
+        <Table>
+
+            <TableBody>
+                {billItems.map((item, index) => (
+                    <TableRow key={index}>
+                        <TableCell className="font-medium">{item.productname}</TableCell>
+                        <TableCell>{item.count}</TableCell>
+                        <TableCell>{item.price}</TableCell>
+                        <TableCell className="text-right">${(item.count * item.price).toFixed(2)}</TableCell>
+                    </TableRow>
+                ))}
+                <TableRow>
+                    <TableCell className="font-medium">Total</TableCell>
+                    <TableCell colSpan={3} className="text-right">${total.toFixed(2)}</TableCell>
+                </TableRow>
+                <TableFooter>
+                </TableFooter>
+            </TableBody>
+        </Table>
+    );
+}

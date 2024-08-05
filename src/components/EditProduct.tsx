@@ -29,7 +29,7 @@ const fetchProductdata = async (): Promise<Product[]> => {
     const data = await fetchFromApi('products');
     return data.map((product: any) => ({
       productId: product.productId,
-      productName: product.name,
+      productName: product.productName,
       category: product.category,
       price: product.price,
       stock: product.stock,
@@ -43,7 +43,7 @@ const fetchProductdata = async (): Promise<Product[]> => {
 
 export function EditProduct() {
     const [products, setProducts] = useState<Product[]>([]);
-    
+
     useEffect(() => {
       const getData = async () => {
         const data = await fetchProductdata();
@@ -59,7 +59,6 @@ export function EditProduct() {
             <TableHeader>
                 <TableRow>
                     <TableHead>Product Name</TableHead>
-                    <TableHead>Category</TableHead>
                     <TableHead>Price</TableHead>
                     <TableHead>Brand</TableHead>
                     <TableHead>Stocks</TableHead>
@@ -70,7 +69,6 @@ export function EditProduct() {
                 {products.map((product, index) => (
                     <TableRow key={index}>
                         <TableCell>{product.productName}</TableCell>
-                        <TableCell>{product.category}</TableCell>
                         <TableCell>{product.price}</TableCell>
                         <TableCell>{product.brand}</TableCell>
                         <TableCell>{product.stock}</TableCell>
