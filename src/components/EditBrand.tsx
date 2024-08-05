@@ -11,6 +11,7 @@ import React, { useState, useEffect } from "react";
 import { DeleteButton } from "./deletebutton";
 import { Editbutton } from "./EditButton";
 import { fetchFromApi } from "@/utils/brandApi";
+import { BrandDeleteButton } from "./brandDelete";
 
 const fetchBrandData = async () => {
   try {
@@ -57,7 +58,7 @@ export function BrandDataEdit() {
             <TableCell>{brand.contact}</TableCell>
             <TableCell>{brand.email}</TableCell>
             <TableCell className="text-right">
-              <DeleteButton />
+              <BrandDeleteButton/>
               <Editbutton />
             </TableCell>
           </TableRow>

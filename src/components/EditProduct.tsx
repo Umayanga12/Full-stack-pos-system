@@ -14,6 +14,7 @@ import { DeleteButton } from "./deletebutton";
 import { fetchFromApi } from "@/utils/productapi";
 import { useState, useEffect } from "react";
 import { Editbutton } from "./EditButton";
+import { ProductDeleteButton } from "./productdelete";
 
 interface Product {
     productId: string;
@@ -73,7 +74,7 @@ export function EditProduct() {
                         <TableCell>{product.brand}</TableCell>
                         <TableCell>{product.stock}</TableCell>
                         <TableCell className="text-right">
-                            <DeleteButton />
+                            <ProductDeleteButton />
                             <Editbutton />
                         </TableCell>
                     </TableRow>

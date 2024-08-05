@@ -57,10 +57,11 @@ export const updateUser = async (id: string, updates: { name?: string; email?: s
 
 // DELETE: Delete a user by ID
 export const deleteUser = async (id: string) => {
+  console.log(id)
   const options = {
     method: 'DELETE',
   };
 
-  return fetchFromApi(`users/${id}`, options);
+  return fetchFromApi(`deleteusers/${id}`, options);
 };
 

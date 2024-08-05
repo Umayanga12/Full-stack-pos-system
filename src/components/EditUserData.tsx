@@ -9,27 +9,31 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
-import { DeleteButton } from "./deletebutton"
+
 import { Editbutton } from "./EditButton"
 import { fetchFromApi } from "@/utils/Userapi";
 import React, { useState, useEffect } from "react";
+import { UserDeleteButton } from "./userdelete";
 
 const fetchUserData = async () => {
   try {
     const data = await fetchFromApi('users');
-   // console.log('Fetched data:', data); // Log the fetched data
+    console.log('Fetched data:', data); // Log the fetched data
     // Transform data to match the desired structure
-    return data.map((user: any) => ({
-      userid: user.userid,
+    const transformedData = data.map((user: any) => ({
+      userid: user._id, // Assuming _id is the correct field for the ID
       username: user.username,
-      type: user.type // Replace with actual field name
+      type: user.type // Ensure this matches the actual field in the response
     }));
+
+    console.log('Transformed data:', transformedData); // Log the transformed data
+    return transformedData;
   } catch (error) {
     console.error("Error fetching users data:", error);
     return [];
   }
 };
-  
+
   export function DataTable() {
     const [userData, setUserData] = useState([]);
 
@@ -38,7 +42,7 @@ const fetchUserData = async () => {
         const usersData = await fetchUserData();
         setUserData(usersData);
       };
-  
+
       getData();
     }, []);
 
@@ -58,7 +62,7 @@ const fetchUserData = async () => {
               <TableCell className="font-medium">{user.username}</TableCell>
             <TableCell className="font-medium">{user.type}</TableCell>
               <TableCell className="text-right">
-                <DeleteButton />
+                <UserDeleteButton userId={user.userid} />
                 <Editbutton />
               </TableCell>
             </TableRow>
@@ -73,4 +77,3 @@ const fetchUserData = async () => {
       </Table>
     )
   }
-  

@@ -11,6 +11,7 @@ import { DeleteButton } from "./deletebutton";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { fetchFromApi } from "@/utils/billapi";
 import { useEffect, useState } from "react";
+import { BillDeleteButton } from "./billdelete";
 
 interface BillItem {
   name: string;
@@ -62,7 +63,6 @@ export function EditBill() {
       {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[175px]">User</TableHead>
           <TableHead>Items</TableHead>
           <TableHead>Total</TableHead>
           <TableHead>Date</TableHead>
@@ -72,7 +72,7 @@ export function EditBill() {
       <TableBody>
         {billdata.map((invoice) => (
           <TableRow key={invoice.billid}>
-            <TableCell className="font-medium">{invoice.user}</TableCell>
+
             <TableCell>
               <TableRow >
                   <TableHead className="w-[100px]">Items</TableHead>
@@ -92,7 +92,7 @@ export function EditBill() {
             <TableCell>${invoice.total.toFixed(2)}</TableCell>
             <TableCell>{invoice.date}</TableCell>
             <TableCell className="text-right">
-              <DeleteButton />
+              <BillDeleteButton/>
             </TableCell>
           </TableRow>
         ))}
