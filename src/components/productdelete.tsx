@@ -10,11 +10,19 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
+import { deleteUser } from "@/utils/Userapi";
 import { toast } from 'react-toastify';
 export function ProductDeleteButton() {
-  const handleDelete = () => {
+  const handleDelete = async () => {
       // Add your delete logic here
-      toast.success('Account successfully deleted!');
+      try {
+        //console.log(userId)
+        await deleteUser(productId);
+        toast.success('Product successfull')
+      } catch (error) {
+        toast.error('Error deleting product.');
+        console.error('Error deleting product:', error);
+      }
     };
   return (
     <AlertDialog>

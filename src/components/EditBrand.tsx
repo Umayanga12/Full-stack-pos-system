@@ -17,12 +17,15 @@ const fetchBrandData = async () => {
   try {
     const data = await fetchFromApi('brands');
     //console.log('Fetched data:', data);
-    return data.map((brand: any) => ({
-      brandId: brand.brandId,
+
+    const transformedData = data.map((brand: any) => ({
+      brandId: brand._id,
       brandName: brand.brandName,
       contact: brand.brandContact,
       email: brand.brandAgentEmail,
     }));
+    console.log("Transformed date : ", transformedData);
+    return transformedData;
   } catch (error) {
     console.error("Error fetching users data:", error);
     return [];
@@ -58,7 +61,7 @@ export function BrandDataEdit() {
             <TableCell>{brand.contact}</TableCell>
             <TableCell>{brand.email}</TableCell>
             <TableCell className="text-right">
-              <BrandDeleteButton/>
+              <BrandDeleteButton brandId={brand.brandId}/>
               <Editbutton />
             </TableCell>
           </TableRow>

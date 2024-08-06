@@ -10,11 +10,25 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
+import { deleteBrand } from "@/utils/brandApi";
 import { toast } from 'react-toastify';
+
+
+interface BrnadDeleteButton{
+  brandId: string;
+}
+
 export function BrandDeleteButton() {
   const handleDelete = () => {
+    try {
+      await deleteBrand({brandId}:BrandDeleteButton)
+      toast.success('Data successfully deleted!');
+    } catch (error) {
+      toast.error("Error Deleting the data");
+      console.error("Error deleting data:", error);
+    }
       // Add your delete logic here
-      toast.success('Account successfully deleted!');
+
     };
   return (
     <AlertDialog>

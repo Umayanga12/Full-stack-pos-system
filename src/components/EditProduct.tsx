@@ -28,14 +28,18 @@ interface Product {
 const fetchProductdata = async (): Promise<Product[]> => {
   try {
     const data = await fetchFromApi('products');
-    return data.map((product: any) => ({
-      productId: product.productId,
+    const transformedData =  data.map((product: any) => ({
+      productId: product._id,
       productName: product.productName,
       category: product.category,
       price: product.price,
       stock: product.stock,
       brand: product.brand,
     }));
+
+    console.log("Trasformed Data : ", transformedData)
+    return transformedData;
+
   } catch (error) {
     console.error("Error fetching products data:", error);
     return [];
@@ -74,7 +78,7 @@ export function EditProduct() {
                         <TableCell>{product.brand}</TableCell>
                         <TableCell>{product.stock}</TableCell>
                         <TableCell className="text-right">
-                            <ProductDeleteButton />
+                            <ProductDeleteButton productId = {product.productId}/>
                             <Editbutton />
                         </TableCell>
                     </TableRow>

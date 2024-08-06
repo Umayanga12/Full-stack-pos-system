@@ -30,9 +30,9 @@ interface Bill {
 const fetchBillData = async () => {
   try {
     const data = await fetchFromApi('bills');
-    return data.map((bills: any) => ({
+    const transformedData =  data.map((bills: any) => ({
       user: bills.userId,
-      billid: bills.billId,
+      billid: bills._id,
       items: bills.items.map((item: any) => ({
         name: item.content,
         quantity: item.quantity,
@@ -41,6 +41,8 @@ const fetchBillData = async () => {
       total: bills.total,
       date: bills.date,
     }));
+    console.log("Transformed Data : ", transformedData);
+    return transformedData;
   } catch (error) {
     console.error("Error fetching invoices data:", error);
     return [];
@@ -92,7 +94,7 @@ export function EditBill() {
             <TableCell>${invoice.total.toFixed(2)}</TableCell>
             <TableCell>{invoice.date}</TableCell>
             <TableCell className="text-right">
-              <BillDeleteButton/>
+              <BillDeleteButton billid = {billdata.billid}/>
             </TableCell>
           </TableRow>
         ))}

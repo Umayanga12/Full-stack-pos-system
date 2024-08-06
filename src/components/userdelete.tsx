@@ -25,8 +25,8 @@ export function UserDeleteButton({ userId }: UserDeleteButtonProps) {
       await deleteUser(userId);
       toast.success('Account successfully deleted!');
     } catch (error) {
-      // toast.error('Error deleting account.');
-      // console.error('Error deleting user:', error);
+      toast.error('Error deleting account.');
+      console.error('Error deleting user:', error);
     }
   };
 

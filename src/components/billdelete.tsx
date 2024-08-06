@@ -10,11 +10,18 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
+import { deleteBill } from "@/utils/billapi";
 import { toast } from 'react-toastify';
 export function BillDeleteButton() {
-  const handleDelete = () => {
+  const handleDelete = async () => {
       // Add your delete logic here
-      toast.success('Account successfully deleted!');
+      try {
+        await deleteBill(billid);
+        toast.success('Data deleted');
+      } catch (error) {
+        toast.error('Error deleting the data');
+        console.log("Error deleting the data : ",error);
+      }
     };
   return (
     <AlertDialog>

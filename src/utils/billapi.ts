@@ -68,5 +68,8 @@ const deleteBill = async (id: string) => {
 
 
 export{
-    
+    createBill,
+    updateBill,
+    fetchBillById,
+    deleteBill
 }
