@@ -10,8 +10,18 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { useState } from 'react'
 
 export function UserEditbutton() {
+  const [userType, setUserType] = useState("User")
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -26,33 +36,42 @@ export function UserEditbutton() {
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input
-              id="name"
-              defaultValue="Pedro Duarte"
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
               Username
             </Label>
             <Input
               id="username"
-              defaultValue="@peduarte"
+              defaultValue="Pedro Duarte"
               className="col-span-3"
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
+            <Label htmlFor="usertype" className="text-right">
+              Type
+            </Label>
+            <Select
+              value={userType}
+              onValueChange={setUserType}
+            >
+              <SelectTrigger className="col-span-3">
+                <SelectValue placeholder="User Type" />
+              </SelectTrigger>
+              <SelectContent>
+              
+                <SelectItem value="Admin">Admin</SelectItem>
+                <SelectItem value="User">User</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="password" className="text-right">
               Password
             </Label>
             <Input
-              id="username"
+              id="password"
               defaultValue="@peduarte"
               className="col-span-3"
+              type="password"
             />
           </div>
         </div>

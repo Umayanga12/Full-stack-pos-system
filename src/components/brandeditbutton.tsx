@@ -21,36 +21,36 @@ export function BrandEditbutton() {
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when done.
+            Make changes to Brand details here. Click save when done.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
+            <Label htmlFor="brandname" className="text-right">
+              Brand Name
             </Label>
             <Input
-              id="name"
+              id="brandname"
               defaultValue="Pedro Duarte"
               className="col-span-3"
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
+            <Label htmlFor="email" className="text-right">
+              Email
             </Label>
             <Input
-              id="username"
+              id="email"
               defaultValue="@peduarte"
               className="col-span-3"
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Password
+            <Label htmlFor="contact" className="text-right">
+              Contact
             </Label>
             <Input
-              id="username"
+              id="contact"
               defaultValue="@peduarte"
               className="col-span-3"
             />

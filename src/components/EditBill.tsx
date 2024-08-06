@@ -78,8 +78,8 @@ export function EditBill() {
             <TableCell>
               <TableRow >
                   <TableHead className="w-[100px]">Items</TableHead>
+                  <TableHead className="w-[100px]">Amount</TableHead>
                   <TableHead className="w-[100px]">Total</TableHead>
-                  <TableHead className="w-[100px]">Date</TableHead>
               </TableRow>
               <ScrollArea className="h-[200px] w-[300px] rounded-md border p-4">
                     {invoice.items.map((item, index) => (
