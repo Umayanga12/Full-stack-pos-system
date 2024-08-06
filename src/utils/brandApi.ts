@@ -71,5 +71,5 @@ export const deleteBrand = async (id: string) => {
     method: 'DELETE',
   };
 
-  return fetchFromApi(`brands/${id}`, options);
+  return fetchFromApi(`deletebrands/${id}`, options);
 };

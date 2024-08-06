@@ -67,5 +67,5 @@ export const deleteProduct = async (id: string) => {
     method: 'DELETE',
   };
 
-  return fetchFromApi(`products/${id}`, options);
+  return fetchFromApi(`deleteproducts/${id}`, options);
 };

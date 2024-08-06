@@ -14,14 +14,15 @@ import { deleteBrand } from "@/utils/brandApi";
 import { toast } from 'react-toastify';
 
 
-interface BrnadDeleteButton{
+interface BrnadDeleteButtonprops{
   brandId: string;
 }
 
-export function BrandDeleteButton() {
+export function BrandDeleteButton({brandId}:BrnadDeleteButtonprops) {
   const handleDelete = async() => {
     try {
-      await deleteBrand({brandId})
+      //console.log(brandId);
+      await deleteBrand(brandId)
       toast.success('Data successfully deleted!');
     } catch (error) {
       toast.error("Error Deleting the data");

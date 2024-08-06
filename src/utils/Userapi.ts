@@ -57,7 +57,7 @@ export const updateUser = async (id: string, updates: { name?: string; email?: s
 
 // DELETE: Delete a user by ID
 export const deleteUser = async (id: string) => {
-  console.log(id)
+  //console.log(id)
   const options = {
     method: 'DELETE',
   };
