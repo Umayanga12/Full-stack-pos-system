@@ -29,23 +29,23 @@ mongoose.connect(process.env.DB_URL)
     .then(() => console.log('MongoDB connected'))
     .catch(error => console.error('MongoDB connection error:', error));
 
-io.on('connection', (socket) => {
-    console.log('a user connected');
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
-    });
+// io.on('connection', (socket) => {
+//     //console.log('a user connected');
+//     socket.on('disconnect', () => {
+//         console.log('user disconnected');
+//     });
 
-    // Emit sales report data in real-time
-    socket.on('getSalesReport', async () => {
-        try {
-            const bills = await Bill.find();
-            const totalSales = bills.reduce((sum, bill) => sum + bill.total, 0);
-            io.emit('salesReport', { totalSales, bills });
-        } catch (error) {
-            console.error('Error fetching sales report:', error);
-        }
-    });
-});
+//     // Emit sales report data in real-time
+//     socket.on('getSalesReport', async () => {
+//         try {
+//             const bills = await Bill.find();
+//             const totalSales = bills.reduce((sum, bill) => sum + bill.total, 0);
+//             io.emit('salesReport', { totalSales, bills });
+//         } catch (error) {
+//             console.error('Error fetching sales report:', error);
+//         }
+//     });
+// });
 
 const PORT = process.env.APPLICATION_PORT || 3000;
 server.listen(PORT, () => {
