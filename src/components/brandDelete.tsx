@@ -19,9 +19,9 @@ interface BrnadDeleteButton{
 }
 
 export function BrandDeleteButton() {
-  const handleDelete = () => {
+  const handleDelete = async() => {
     try {
-      await deleteBrand({brandId}:BrandDeleteButton)
+      await deleteBrand({brandId})
       toast.success('Data successfully deleted!');
     } catch (error) {
       toast.error("Error Deleting the data");

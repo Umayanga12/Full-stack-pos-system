@@ -14,6 +14,7 @@ import { Editbutton } from "./EditButton"
 import { fetchFromApi } from "@/utils/Userapi";
 import React, { useState, useEffect } from "react";
 import { UserDeleteButton } from "./userdelete";
+import { UserEditbutton } from "./userEdit";
 
 const fetchUserData = async () => {
   try {
@@ -63,7 +64,7 @@ const fetchUserData = async () => {
             <TableCell className="font-medium">{user.type}</TableCell>
               <TableCell className="text-right">
                 <UserDeleteButton userId={user.userid} />
-                <Editbutton />
+                <UserEditbutton/>
               </TableCell>
             </TableRow>
           ))}
