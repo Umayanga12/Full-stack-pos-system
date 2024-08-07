@@ -18,7 +18,8 @@ interface BillDeleteButtonProps{
 }
 export function BillDeleteButton({billid} : BillDeleteButtonProps) {
   const handleDelete = async () => {
-      // Add your delete logic here
+      // Add your delete logic here'
+      // console.log(billid)
       try {
         await deleteBill(billid);
         toast.success('Data deleted');

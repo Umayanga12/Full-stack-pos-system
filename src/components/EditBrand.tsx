@@ -25,7 +25,7 @@ const fetchBrandData = async () => {
       contact: brand.brandContact,
       email: brand.brandAgentEmail,
     }));
-    console.log("Transformed date : ", transformedData);
+    //console.log("Transformed date : ", transformedData);
     return transformedData;
   } catch (error) {
     console.error("Error fetching users data:", error);

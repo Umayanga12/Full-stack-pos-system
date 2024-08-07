@@ -53,7 +53,7 @@ export function  EditProduct() {
     useEffect(() => {
       const getData = async () => {
         const data = await fetchProductdata();
-        console.log('Fetched data:', data);
+        //console.log('Fetched data:', data);
         setProducts(data);
       }
       getData();
