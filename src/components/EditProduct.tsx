@@ -47,7 +47,7 @@ const fetchProductdata = async (): Promise<Product[]> => {
   }
 }
 
-export function EditProduct() {
+export function  EditProduct() {
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {

@@ -17,7 +17,6 @@ import { deleteUser } from '@/utils/Userapi';
 interface UserDeleteButtonProps {
   userId: string;
 }
-
 export function UserDeleteButton({ userId }: UserDeleteButtonProps) {
   const handleDelete = async () => {
     try {

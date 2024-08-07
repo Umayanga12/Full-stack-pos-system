@@ -12,7 +12,11 @@ import {
 import { Button } from "@/components/ui/button"
 import { deleteBill } from "@/utils/billapi";
 import { toast } from 'react-toastify';
-export function BillDeleteButton() {
+
+interface BillDeleteButtonProps{
+  billid: string;
+}
+export function BillDeleteButton({billid} : BillDeleteButtonProps) {
   const handleDelete = async () => {
       // Add your delete logic here
       try {

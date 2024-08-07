@@ -63,7 +63,7 @@ const deleteBill = async (id: string) => {
         method: 'DELETE',
     };
 
-    return fetchFromApi(`bill/${id}`, options);
+    return fetchFromApi(`deletebills/${id}`, options);
 };
 
 
