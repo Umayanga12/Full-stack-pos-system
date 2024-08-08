@@ -17,11 +17,41 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { useState } from 'react'
+import { fetchFromApi, fetchUserById } from "@/utils/Userapi"
+import { useEffect, useState } from 'react'
+
+interface UserEditButtonProps{
+  userId: string;
+}
+
+const fetchUserDatabyId = async ({userId}:UserEditButtonProps) => {
+  try {
+    const data = await fetchUserById(userId);
+    console.log('Fetched data:', data); // Log the fetched data
+    // Transform data to match the desired structure
+    const transformedData = data.map((user: any) => ({
+      userid: user._id, // Assuming _id is the correct field for the ID
+      username: user.username,
+      type: user.type // Ensure this matches the actual field in the response
+    }));
+
+    console.log('Transformed data:', transformedData); // Log the transformed data
+    return transformedData;
+  } catch (error) {
+    console.error("Error fetching users data:", error);
+    return [];
+  }
+}
+
 
 export function UserEditbutton() {
-  const [userType, setUserType] = useState("User")
+  const [userData, setUserData] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
 
+    };
+    getData();
+  },[]);
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -57,7 +87,7 @@ export function UserEditbutton() {
                 <SelectValue placeholder="User Type" />
               </SelectTrigger>
               <SelectContent>
-              
+
                 <SelectItem value="Admin">Admin</SelectItem>
                 <SelectItem value="User">User</SelectItem>
               </SelectContent>
