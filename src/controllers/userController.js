@@ -5,7 +5,6 @@ import userModel from "../models/userModel";
 import { v4 as uuidv4 } from 'uuid';
 
 require('dotenv').config();
-
 const generateSecretKey = () => {
     return crypto.randomBytes(64).toString('hex');
 };
@@ -13,8 +12,6 @@ const generateSecretKey = () => {
 const secretKey  = generateSecretKey();
 
 //controlllers
-
-
 const register = async (req, res) => {
     try {
         const { username, password, type } = req.body; // Removed uuid from body
@@ -46,7 +43,6 @@ const login = async (req, res) => {
         res.status(500).send({ error: error.message });
     }
 };
-
 const getUsers = async (req, res) => {
     try {
         const users = await userModel.find({}, '-password');
@@ -56,6 +52,17 @@ const getUsers = async (req, res) => {
     }
 };
 
+const getUserById = async(req,res) =>{
+  try {
+    const {id} = req.params;
+    const userdata = await userModel.findById(id);
+    res.send(userdata);
+  } catch (error) {
+    res.status(500).send({
+      error: error.message
+    });
+  }
+}
 const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
@@ -65,7 +72,6 @@ const updateUser = async (req, res) => {
         res.status(400).send({ error: error.message });
     }
 };
-
 const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
@@ -81,5 +87,6 @@ export{
     login,
     getUsers,
     updateUser,
-    deleteUser
+    deleteUser,
+    getUserById
 }

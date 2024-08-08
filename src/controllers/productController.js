@@ -6,6 +6,19 @@ const getProducts = async (req, res) => {
     res.send(products);
 };
 
+const getProductById = async(req,res) => {
+  try {
+    const {id} = req.params;
+    const productData = await productModel.findById(id);
+    res.send(productData);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      error:error.message
+    });
+  }
+}
+
 const createProduct = async (req, res) => {
     const product = new productModel(req.body);
     await product.save();
@@ -38,5 +51,6 @@ export {
     getProducts,
     createProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getProductById
 }
