@@ -11,7 +11,7 @@ const createBrand = async (req, res) => {
     console.log("create brand controller called ");
     try {
         const Brand = new brandModel(req.body);
-        //console.log(Brand); 
+        //console.log(Brand);
         const existingDetail = await brandModel.findOne({brandName: req.body.brandName});
         //console.log(req.body.brandName)
         //console.log(existingDetail);
@@ -27,6 +27,19 @@ const createBrand = async (req, res) => {
     }
 };
 
+const getBrandbyId = async (req,res) => {
+  try {
+    const {id} = req.params;
+    const brandData = await brandModel.findById(id);
+    res.send(brandData);
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      error : 'Error : ',
+      details : error.message
+    });
+  }
+}
 
 const updateBrand = async (req, res) => {
     const { id } = req.params;
@@ -44,5 +57,6 @@ export {
     getBrands,
     createBrand,
     updateBrand,
-    deleteBrand
+    deleteBrand,
+    getBrandbyId
 }
