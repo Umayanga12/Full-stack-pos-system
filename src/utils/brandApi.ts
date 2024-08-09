@@ -45,7 +45,7 @@ export const fetchBrands = async () => {
 
 // READ: Fetch a single brand by ID
 export const fetchBrandById = async (id: string) => {
-  return fetchFromApi(`brands/${id}`);
+  return fetchFromApi(`getbrand/${id}`);
 };
 
 // UPDATE: Update a brand by ID

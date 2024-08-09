@@ -12,7 +12,7 @@ import { DeleteButton } from "./deletebutton";
 import { Editbutton } from "./EditButton";
 import { fetchFromApi } from "@/utils/brandApi";
 import { BrandDeleteButton } from "./brandDelete";
-import { BrandEditbutton } from "./brandeditbutton";
+import { BrandEditButton } from "./brandeditbutton";
 
 const fetchBrandData = async () => {
   try {
@@ -63,7 +63,7 @@ export function BrandDataEdit() {
             <TableCell>{brand.email}</TableCell>
             <TableCell className="text-right">
               <BrandDeleteButton brandId={brand.brandId}/>
-              <BrandEditbutton/>
+              <BrandEditButton brandId={brand.brandId}/>
             </TableCell>
           </TableRow>
         ))}

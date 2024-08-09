@@ -14,7 +14,7 @@ import { Editbutton } from "./EditButton"
 import { fetchFromApi } from "@/utils/Userapi";
 import React, { useState, useEffect } from "react";
 import { UserDeleteButton } from "./userdelete";
-import { UserEditbutton } from "./userEdit";
+import { UserEditButton } from "./userEdit";
 
 const fetchUserData = async () => {
   try {
@@ -64,17 +64,11 @@ const fetchUserData = async () => {
             <TableCell className="font-medium">{user.type}</TableCell>
               <TableCell className="text-right">
                 <UserDeleteButton userId={user.userid} />
-                <UserEditbutton/>
+                <UserEditButton userId={user.userid}/>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
-        {/* <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="text-right">$2,500.00</TableCell>
-          </TableRow>
-        </TableFooter> */}
       </Table>
     )
   }

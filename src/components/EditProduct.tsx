@@ -80,7 +80,7 @@ export function  EditProduct() {
                         <TableCell>{product.stock}</TableCell>
                         <TableCell className="text-right">
                             <ProductDeleteButton productId = {product.productId}/>
-                            <ProductEditbutton/>
+                            <ProductEditbutton productId={product.productId}/>
                         </TableCell>
                     </TableRow>
                 ))}

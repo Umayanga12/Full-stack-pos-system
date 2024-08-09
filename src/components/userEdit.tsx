@@ -17,41 +17,67 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { fetchFromApi, fetchUserById } from "@/utils/Userapi"
+import { fetchUserById } from "@/utils/Userapi"
 import { useEffect, useState } from 'react'
 
-interface UserEditButtonProps{
+interface UserEditButtonProps {
   userId: string;
 }
 
-const fetchUserDatabyId = async ({userId}:UserEditButtonProps) => {
+const fetchUserDatabyId = async (userId: string) => {
   try {
     const data = await fetchUserById(userId);
-    console.log('Fetched data:', data); // Log the fetched data
-    // Transform data to match the desired structure
-    const transformedData = data.map((user: any) => ({
-      userid: user._id, // Assuming _id is the correct field for the ID
-      username: user.username,
-      type: user.type // Ensure this matches the actual field in the response
-    }));
-
-    console.log('Transformed data:', transformedData); // Log the transformed data
+    const transformedData = {
+      userid: data._id,
+      username: data.username,
+      type: data.type,
+      password: data.password // Initialize password field
+    };
     return transformedData;
   } catch (error) {
-    console.error("Error fetching users data:", error);
-    return [];
+    console.error("Error fetching user's data:", error);
+    return null;
   }
 }
 
+export function UserEditButton({ userId }: UserEditButtonProps) {
+  const [userData, setUserData] = useState({
+    userid: '',
+    username: '',
+    type: '',
+    password: ''
+  });
 
-export function UserEditbutton() {
-  const [userData, setUserData] = useState([]);
   useEffect(() => {
     const getData = async () => {
-
+      const userData = await fetchUserDatabyId(userId);
+      if (userData) {
+        setUserData(userData);
+      }
     };
     getData();
-  },[]);
+  }, [userId]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setUserData((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
+
+  const handleSelectChange = (value: string) => {
+    setUserData((prevState) => ({
+      ...prevState,
+      type: value,
+    }));
+  };
+
+  const handleSaveChanges = () => {
+    // Logic to save changes
+    console.log("Updated user data:", userData);
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -71,23 +97,23 @@ export function UserEditbutton() {
             </Label>
             <Input
               id="username"
-              defaultValue="Pedro Duarte"
+              value={userData.username}
+              onChange={handleInputChange}
               className="col-span-3"
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="usertype" className="text-right">
+            <Label htmlFor="type" className="text-right">
               Type
             </Label>
             <Select
-              value={userType}
-              onValueChange={setUserType}
+              value={userData.type}
+              onValueChange={handleSelectChange}
             >
               <SelectTrigger className="col-span-3">
                 <SelectValue placeholder="User Type" />
               </SelectTrigger>
               <SelectContent>
-
                 <SelectItem value="Admin">Admin</SelectItem>
                 <SelectItem value="User">User</SelectItem>
               </SelectContent>
@@ -99,14 +125,15 @@ export function UserEditbutton() {
             </Label>
             <Input
               id="password"
-              defaultValue="@peduarte"
+              value={userData.password}
+              onChange={handleInputChange}
               className="col-span-3"
               type="password"
             />
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <Button type="button" onClick={handleSaveChanges}>Save changes</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

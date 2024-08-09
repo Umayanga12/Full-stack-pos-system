@@ -10,8 +10,60 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { fetchBrandById } from "@/utils/brandApi"
+import { useEffect, useState } from "react"
 
-export function BrandEditbutton() {
+interface EditBrandDataButtonProp {
+  brandId: string;
+}
+
+const fetchBrandDataById = async (brandId: string) => {
+  try {
+    const data = await fetchBrandById(brandId);
+    const transformedData = {
+      brandId: data._id,
+      brandName: data.brandName,
+      contact: data.brandContact,
+      email: data.brandAgentEmail,
+    };
+    return transformedData;
+  } catch (error) {
+    console.error("Error fetching brand's data:", error);
+    return null;
+  }
+}
+
+export function BrandEditButton({ brandId }: EditBrandDataButtonProp) {
+  const [brandData, setBrandData] = useState({
+    brandId: '',
+    brandName: '',
+    contact: '',
+    email: ''
+  });
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await fetchBrandDataById(brandId);
+      if (data) {
+        setBrandData(data);
+      }
+    };
+    getData();
+  }, [brandId]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setBrandData((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
+
+  const handleSaveChanges = () => {
+    // Logic to save changes
+    console.log("Updated brand data:", brandData);
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -26,12 +78,13 @@ export function BrandEditbutton() {
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="brandname" className="text-right">
+            <Label htmlFor="brandName" className="text-right">
               Brand Name
             </Label>
             <Input
-              id="brandname"
-              defaultValue="Pedro Duarte"
+              id="brandName"
+              value={brandData.brandName}
+              onChange={handleInputChange}
               className="col-span-3"
             />
           </div>
@@ -41,7 +94,8 @@ export function BrandEditbutton() {
             </Label>
             <Input
               id="email"
-              defaultValue="@peduarte"
+              value={brandData.email}
+              onChange={handleInputChange}
               className="col-span-3"
             />
           </div>
@@ -51,13 +105,14 @@ export function BrandEditbutton() {
             </Label>
             <Input
               id="contact"
-              defaultValue="@peduarte"
+              value={brandData.contact}
+              onChange={handleInputChange}
               className="col-span-3"
             />
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <Button type="button" onClick={handleSaveChanges}>Save changes</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

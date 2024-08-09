@@ -38,7 +38,7 @@ export const fetchProducts = async () => {
 
 // READ: Fetch a single product by ID
 export const fetchProductById = async (id: string) => {
-  return fetchFromApi(`products/${id}`);
+  return fetchFromApi(`getproduct/${id}`);
 };
 
 // UPDATE: Update a product by ID

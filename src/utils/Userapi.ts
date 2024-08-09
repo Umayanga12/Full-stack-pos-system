@@ -39,7 +39,7 @@ export const fetchUsers = async () => {
 
 // READ: Fetch a single user by ID
 export const fetchUserById = async (id: string) => {
-  return fetchFromApi(`users/${id}`);
+  return fetchFromApi(`/userdata/${id}`);
 };
 
 // UPDATE: Update a user by ID

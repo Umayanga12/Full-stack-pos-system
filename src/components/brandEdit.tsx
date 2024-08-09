@@ -10,8 +10,49 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { fetchBrandById } from "@/utils/brandApi";
+import { useEffect, useState } from "react";
+import { date } from "zod";
 
-export function BrandEditbutton() {
+interface branddetailProp{
+  brandId:string;
+}
+
+const fetchBrandDatabyId = async (brandId:string) => {
+  try {
+    const data = await fetchBrandById(brandId);
+   // console.log(date)
+    const transformedData = {
+      brandId: data._id,
+      brandname: data.brandname,
+      contact: data.brandtype,
+      email: data.email,
+    };
+    return transformedData;
+  } catch (error) {
+    console.error("Error fetching user's data:", error);
+    return null;
+  }
+}
+
+export function BrandEditbutton({brandId}:branddetailProp) {
+  const [brandData, setBrandData] = useState({
+    brandId: '',
+    brandname: '',
+    contact: '',
+    email: ''
+  });
+
+  useEffect(() => {
+    const getData = async () => {
+      const brandData = await fetchBrandDatabyId(brandId);
+      if (brandData) {
+        setBrandData(brandData);
+      }
+    };
+    getData();
+  }, [brandId]);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
