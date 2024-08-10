@@ -2,21 +2,17 @@ import express from 'express';
 import mongoose from 'mongoose';
 import http from 'http';
 import cors from 'cors';
-import { Server } from 'socket.io';
 import dotenv from 'dotenv';
 import userRoutes from './routers/userRouter.js';
 import brandRoutes from './routers/brandRouter.js';
 import productRoutes from './routers/productRouter.js';
 import billRoutes from './routers/billRouter.js';
-import dashRoutes from './routers/dashboardroutes.js';
-import Bill from './models/billModel.js';
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
 const server = http.createServer(app);
-const io = new Server(server);
 
 app.use(express.json());
 app.use('/user', userRoutes);

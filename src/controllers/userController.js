@@ -66,7 +66,15 @@ const getUserById = async(req,res) =>{
 const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const user = await userModel.findByIdAndUpdate(id, req.body, { new: true });
+        const updatedData = req.body;
+        //console.log("update User")
+        // Check if password is being updated
+        if (updatedData.password) {
+            const salt = await bcrypt.genSalt(10);
+            updatedData.password = await bcrypt.hash(updatedData.password, salt);
+        }
+
+        const user = await userModel.findByIdAndUpdate(id, updatedData, { new: true });
         res.send(user);
     } catch (error) {
         res.status(400).send({ error: error.message });

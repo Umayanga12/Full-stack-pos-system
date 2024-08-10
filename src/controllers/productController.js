@@ -27,7 +27,9 @@ const createProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
     const { id } = req.params;
+    //console.log(req.body)
     const product = await productModel.findByIdAndUpdate(id, req.body, { new: true });
+    console.log(product)
     res.send(product);
 };
 
