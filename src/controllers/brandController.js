@@ -8,7 +8,7 @@ const getBrands = async (req, res) => {
 }
 
 const createBrand = async (req, res) => {
-    console.log("create brand controller called ");
+    //console.log("create brand controller called ");
     try {
         const Brand = new brandModel(req.body);
         //console.log(Brand);
