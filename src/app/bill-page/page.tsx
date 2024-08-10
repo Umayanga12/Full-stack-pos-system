@@ -12,6 +12,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import BillPageProduct from "@/components/billpageproduct";
 import BillPageList from "@/components/billpagelist";
 import { Button } from "@/components/ui/button";
+import { createBill } from "@/utils/billapi";
 
 export default function BillPage() {
     const [billItems, setBillItems] = useState<Array<{ productname: string, count: number, price: number }>>([]);
@@ -48,6 +49,25 @@ export default function BillPage() {
         });
         setTotal(prev => prev - product.price);
     };
+
+    const handlePayment = async () => {
+    const items = billItems.map(item => ({
+        productID: item.productname,
+        unitPrice: item.price,
+        quantity: item.count,
+        total: item.price * item.count,
+    }));
+    const bill = {
+        billDate: new Date(),
+        billTotal: total,
+        items: items, // Remove the extra array wrapping the items property
+    };
+      const addTODB = await createBill(bill);
+      if (addTODB) {
+          setBillItems([]);
+          setTotal(0);
+      }
+    }
 
     return (
         <div className="flex">
@@ -91,7 +111,7 @@ export default function BillPage() {
                     <TableFooter>
                         <TableRow>
                             <TableCell className="text-right">
-                                <Button>Make Payment</Button>
+                                <Button onClick={handlePayment}>Make Payment</Button>
                             </TableCell>
                         </TableRow>
                     </TableFooter>

@@ -31,15 +31,14 @@ const fetchBillData = async () => {
   try {
     const data = await fetchFromApi('bills');
     const transformedData =  data.map((bills: any) => ({
-      user: bills.userId,
-      billid: bills.billid,
+      billid: bills._id,
       items: bills.items.map((item: any) => ({
-        name: item.content,
+        name: item.productID,
         quantity: item.quantity,
-        price: item.price,
+        price: item.total,
       })),
-      total: bills.total,
-      date: bills.date,
+      total: bills.billTotal,
+      date: bills.billDate,
     }));
     console.log("Transformed Data : ", transformedData);
     return transformedData;
@@ -76,27 +75,27 @@ export function EditBill() {
           <TableRow key={index}>
             <TableCell>
               <Table className="w-full">
+              <ScrollArea className="h-[200px] w-[300px] rounded-md border">
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="w-[100px]">Name</TableHead>
-                    <TableHead className="w-[100px]">Quantity</TableHead>
-                    <TableHead className="w-[100px]">Price</TableHead>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Quantity</TableHead>
+                    <TableHead>Price</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <ScrollArea className="h-[200px] w-[300px] rounded-md border p-4">
                     {invoice.items.map((item, itemIndex) => (
                       <TableRow key={itemIndex}>
                         <TableCell>{item.name}</TableCell>
                         <TableCell>{item.quantity}</TableCell>
-                        <TableCell>${item.price.toFixed(2)}</TableCell>
+                        <TableCell>${(item.price).toFixed(2)}</TableCell>
                       </TableRow>
                     ))}
-                  </ScrollArea>
                 </TableBody>
+                </ScrollArea>
               </Table>
             </TableCell>
-            <TableCell>${invoice.total.toFixed(2)}</TableCell>
+            <TableCell>${(invoice.total).toFixed(2)}</TableCell>
             <TableCell>{invoice.date}</TableCell>
             <TableCell className="text-right">
               <BillDeleteButton billid={invoice.billid} />

@@ -29,34 +29,12 @@ const createBill = async (bill: {
         body: JSON.stringify(bill),
     };
 
-    return fetchFromApi('bill', options);
+    return fetchFromApi('createbills', options);
 }
 
 const fetchBillById = async (id: string) => {
     return fetchFromApi(`bill/${id}`);
 }
-
-const updateBill = async (id: string, updates: {
-    billDate?: Date,
-    billTotal?: Number,
-    items:[{
-        productID:String,
-        unitPrice:Number,
-        quantity:Number,
-        total:Number
-    }],
-}) => {
-    const options = {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updates),
-    };
-
-    return fetchFromApi(`bill/${id}`, options);
-}
-
 
 const deleteBill = async (id: string) => {
     const options = {
@@ -69,7 +47,6 @@ const deleteBill = async (id: string) => {
 
 export{
     createBill,
-    updateBill,
     fetchBillById,
     deleteBill
 }
