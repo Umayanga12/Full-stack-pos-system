@@ -22,10 +22,9 @@ const BrandPage: React.FC = () =>{
                     </TabsContent>
                     <TabsContent value="2">
                         <div className="flex gap-10">
-                        
                             <BrandAddForm />
                         </div>
-                        
+
                     </TabsContent>
             </Tabs>
 
@@ -36,4 +35,4 @@ const BrandPage: React.FC = () =>{
     )
 }
 
-export default BrandPage;   
+export default BrandPage;

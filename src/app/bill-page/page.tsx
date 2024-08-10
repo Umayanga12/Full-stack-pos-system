@@ -74,6 +74,8 @@ export default function BillPage() {
             <div>
                 <NavBar />
             </div>
+            <div>
+            <h3 className="text-4xl font-bold pl-7 pt-4">Make Invoice</h3>
             <div className="flex">
                 <div className="gap-2 p-8">
                     <TableHeader>
@@ -116,6 +118,7 @@ export default function BillPage() {
                         </TableRow>
                     </TableFooter>
                 </div>
+            </div>
             </div>
         </div>
     );

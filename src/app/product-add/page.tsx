@@ -24,6 +24,7 @@ import NavBar from "@/components/navBar";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { createBrand, fetchBrands } from "@/utils/brandApi";
+import { createProduct } from "@/utils/productapi";
 
 const formSchema = z.object({
   productName: z.string().min(2, {
@@ -32,7 +33,7 @@ const formSchema = z.object({
   brand: z.string().min(2, {
     message: "Brand must be selected.",
   }),
-  stocks: z.string().min(1, {
+  stock: z.string().min(1, {
     message: "Stocks must be a positive number.",
   }),
   price: z.string().min(1, {
@@ -41,9 +42,9 @@ const formSchema = z.object({
 }).refine((data) => parseFloat(data.price) > 0, {
   message: "Price must be a positive value",
   path: ["price"],
-}).refine((data) => parseInt(data.stocks, 10) > 0, {
+}).refine((data) => parseInt(data.stock, 10) > 0, {
   message: "Stocks must be a positive value",
-  path: ["stocks"],
+  path: ["stock"],
 });
 
 const ProductAddForm: React.FC = () =>{
@@ -53,7 +54,7 @@ const ProductAddForm: React.FC = () =>{
     defaultValues: {
       productName: "",
       brand: "",
-      stocks: "",
+      stock: "",
       price: "",
     },
   });
@@ -72,18 +73,15 @@ const ProductAddForm: React.FC = () =>{
   }, []);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const { productName, brand, stocks, price } = values;
-
     try {
-      //console.log("Product created successfully:", values);
-
-      // const result = await createBrand('/createbrands',values);
-      // console.log("Product created successfully:", result);
-      
-      // Handle success (e.g., display a success message or redirect)
+      //console.log(values)
+      const result = await createProduct(values);
+      //console.log("Product created successfully:", result);
+      // You can reset the form or display a success message
+      form.reset();
     } catch (error) {
       console.error("Error creating product:", error);
-      // Handle error (e.g., display an error message)
+      // Display an error message to the user
     }
   };
 
@@ -138,12 +136,12 @@ const ProductAddForm: React.FC = () =>{
             />
             <FormField
               control={form.control}
-              name="stocks"
+              name="stock"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Stocks</FormLabel>
+                  <FormLabel>Stock</FormLabel>
                   <FormControl>
-                    <Input placeholder="Stocks" {...field} />
+                    <Input placeholder="Stock" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -162,7 +160,7 @@ const ProductAddForm: React.FC = () =>{
                 </FormItem>
               )}
             />
-            <Button type="submit">Save New Product</Button>
+            <Button type="submit" onClick={onSubmit}>Save New Product</Button>
           </form>
         </Form>
       </div>

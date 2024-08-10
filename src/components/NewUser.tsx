@@ -57,6 +57,7 @@ export function ProfileForm() {
       console.log("User created successfully:", values);
       const result = await createUser('/register',{ username, password, type });
       //console.log("User created successfully:", result);
+      form.reset()
     } catch (error) {
       console.error("Error creating user:", error);
       // Handle error (e.g., display an error message)
@@ -87,7 +88,7 @@ export function ProfileForm() {
             <FormItem>
               <FormLabel>User Type</FormLabel>
               <FormControl className="pr-4">
-                <Select 
+                <Select
                   value={field.value}
                   onValueChange={field.onChange}
                 >

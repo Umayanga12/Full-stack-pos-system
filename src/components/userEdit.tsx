@@ -87,6 +87,7 @@ export function UserEditButton({ userId }: UserEditButtonProps) {
       };
      // console.log(updates)
       await updateUser(userId, updates);
+
     } catch (error) {
       console.error("Error updating user data:", error);
     }

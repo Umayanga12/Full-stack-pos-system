@@ -17,9 +17,10 @@ export const fetchFromApi = async (endpoint: string, options?: RequestInit) => {
 export const createProduct = async (product: {
   productName: string;
   brand: string;
-  price: number;
-  stock: number;
+  price: number|string;
+  stock: number|string;
 }) => {
+  console.log(product)
   const options = {
     method: 'POST',
     headers: {
@@ -28,7 +29,7 @@ export const createProduct = async (product: {
     body: JSON.stringify(product),
   };
 
-  return fetchFromApi('products', options);
+  return fetchFromApi('addproducts', options);
 };
 
 // READ: Fetch all products
