@@ -43,7 +43,7 @@ export const fetchUserById = async (id: string) => {
 };
 
 // UPDATE: Update a user by ID
-export const updateUser = async (id: string, updates: { name?: string; email?: string }) => {
+export const updateUser = async (id: string, updates: { username?: string; type?: string }) => {
   const options = {
     method: 'PUT',
     headers: {
@@ -51,8 +51,8 @@ export const updateUser = async (id: string, updates: { name?: string; email?: s
     },
     body: JSON.stringify(updates),
   };
-
-  return fetchFromApi(`users/${id}`, options);
+  //console.log(updates)
+  return fetchFromApi(`updateusers/${id}`, options);
 };
 
 // DELETE: Delete a user by ID

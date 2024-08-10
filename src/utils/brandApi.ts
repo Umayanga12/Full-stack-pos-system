@@ -62,7 +62,7 @@ export const updateBrand = async (id: string, updates: {
     body: JSON.stringify(updates),
   };
 
-  return fetchFromApi(`brands/${id}`, options);
+  return fetchFromApi(`updatebrands/${id}`, options);
 };
 
 // DELETE: Delete a brand by ID

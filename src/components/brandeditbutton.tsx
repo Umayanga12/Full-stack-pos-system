@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { fetchBrandById } from "@/utils/brandApi"
+import { fetchBrandById, updateBrand } from "@/utils/brandApi"
 import { useEffect, useState } from "react"
 
 interface EditBrandDataButtonProp {
@@ -59,9 +59,35 @@ export function BrandEditButton({ brandId }: EditBrandDataButtonProp) {
     }));
   };
 
-  const handleSaveChanges = () => {
-    // Logic to save changes
-    console.log("Updated brand data:", brandData);
+  const handleSaveChanges = async () => {
+    try {
+      const { brandName, contact, email } = brandData;
+
+      // Prepare the updates object
+      const updates = {
+        brandName,
+        brandContact: contact,
+        brandAgentEmail: email,
+      };
+
+      // Call the updateBrand function with the brand ID and updates
+      const response = await updateBrand(brandId, updates);
+
+      // Ensure the response is a valid object
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Error updating brand:', errorData);
+        // Optionally, display an error message to the user
+      } else {
+        const data = await response.json();
+       // console.log('Brand updated successfully:', data);
+        // Optionally, update your UI or state to reflect the changes
+      }
+    } catch (error) {
+      console.error('An unexpected error occurred:', error);
+      // Optionally, display a general error message to the user
+    }
+
   };
 
   return (

@@ -19,7 +19,7 @@ import { UserEditButton } from "./userEdit";
 const fetchUserData = async () => {
   try {
     const data = await fetchFromApi('users');
-    console.log('Fetched data:', data); // Log the fetched data
+    //console.log('Fetched data:', data); // Log the fetched data
     // Transform data to match the desired structure
     const transformedData = data.map((user: any) => ({
       userid: user._id, // Assuming _id is the correct field for the ID
@@ -27,7 +27,7 @@ const fetchUserData = async () => {
       type: user.type // Ensure this matches the actual field in the response
     }));
 
-    console.log('Transformed data:', transformedData); // Log the transformed data
+    //console.log('Transformed data:', transformedData); // Log the transformed data
     return transformedData;
   } catch (error) {
     console.error("Error fetching users data:", error);

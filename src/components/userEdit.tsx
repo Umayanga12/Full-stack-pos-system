@@ -17,8 +17,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { fetchUserById } from "@/utils/Userapi"
+import { fetchUserById, updateUser } from "@/utils/Userapi"
 import { useEffect, useState } from 'react'
+import { z } from "zod";
 
 interface UserEditButtonProps {
   userId: string;
@@ -33,6 +34,7 @@ const fetchUserDatabyId = async (userId: string) => {
       type: data.type,
       password: data.password // Initialize password field
     };
+  //  console.log(transformedData)
     return transformedData;
   } catch (error) {
     console.error("Error fetching user's data:", error);
@@ -73,9 +75,21 @@ export function UserEditButton({ userId }: UserEditButtonProps) {
     }));
   };
 
-  const handleSaveChanges = () => {
-    // Logic to save changes
-    console.log("Updated user data:", userData);
+
+  const handleSaveChanges = async () => {
+    try {
+      const { username, type } = userData;
+
+      // Prepare the updates object
+      const updates = {
+        username: username,
+        type: type,
+      };
+     // console.log(updates)
+      await updateUser(userId, updates);
+    } catch (error) {
+      console.error("Error updating user data:", error);
+    }
   };
 
   return (
@@ -119,7 +133,7 @@ export function UserEditButton({ userId }: UserEditButtonProps) {
               </SelectContent>
             </Select>
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
+          {/* <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="password" className="text-right">
               Password
             </Label>
@@ -130,7 +144,7 @@ export function UserEditButton({ userId }: UserEditButtonProps) {
               className="col-span-3"
               type="password"
             />
-          </div>
+          </div> */}
         </div>
         <DialogFooter>
           <Button type="button" onClick={handleSaveChanges}>Save changes</Button>
