@@ -75,7 +75,7 @@ export function  EditProduct() {
                 {products.map((product, index) => (
                     <TableRow key={index}>
                         <TableCell>{product.productName}</TableCell>
-                        <TableCell>{product.price}</TableCell>
+                        <TableCell>${(product.price).toFixed(2)}</TableCell>
                         <TableCell>{product.brand}</TableCell>
                         <TableCell>{product.stock}</TableCell>
                         <TableCell className="text-right">

@@ -1,81 +1,102 @@
+"use client"
+import React, { useState } from "react";
 import NavBar from "@/components/navBar";
 import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableFooter,
-    TableHead,
     TableHeader,
     TableRow,
-  } from "@/components/ui/table"
-import { ScrollArea } from "@/components/ui/scroll-area"
+    TableHead,
+    TableFooter,
+    TableCell,
+} from "@/components/ui/table";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import BillPageProduct from "@/components/billpageproduct";
 import BillPageList from "@/components/billpagelist";
 import { Button } from "@/components/ui/button";
 
-const sampleBillItems = [
-  { productname: "Product A", count: 2, price: 15.00 },
-  { productname: "Product B", count: 1, price: 55.50 },
-  { productname: "Product C", count: 3, price: 10.00 },
-  { productname: "Product C", count: 3, price: 10.00 },
-  { productname: "Product C", count: 3, price: 10.00 },
-];
+export default function BillPage() {
+    const [billItems, setBillItems] = useState<Array<{ productname: string, count: number, price: number }>>([]);
+    const [total, setTotal] = useState(0);
 
-const sampleTotal = sampleBillItems.reduce(
-  (acc, item) => acc + item.count * item.price, 0
-);
+    const handleAdd = (product: { productname: string, price: number }) => {
+        setBillItems(prev => {
+            const existingItem = prev.find(item => item.productname === product.productname);
+            if (existingItem) {
+                return prev.map(item =>
+                    item.productname === product.productname
+                        ? { ...item, count: item.count + 1 }
+                        : item
+                );
+            } else {
+                return [...prev, { productname: product.productname, count: 1, price: product.price }];
+            }
+        });
+        setTotal(prev => prev + product.price);
+    };
 
-export default function BillPage(){
-    return(
+    const handleRemove = (product: { productname: string, price: number }) => {
+        setBillItems(prev => {
+            const existingItem = prev.find(item => item.productname === product.productname);
+            if (existingItem && existingItem.count > 1) {
+                return prev.map(item =>
+                    item.productname === product.productname
+                        ? { ...item, count: item.count - 1 }
+                        : item
+                );
+            } else {
+                return prev.filter(item => item.productname !== product.productname);
+            }
+        });
+        setTotal(prev => prev - product.price);
+    };
+
+    return (
         <div className="flex">
             <div>
-                <NavBar/>
+                <NavBar />
             </div>
             <div className="flex">
                 <div className="gap-2 p-8">
-                <TableHeader>
-                    <TableRow>
-                        <TableHead className="w-[100px]">Item</TableHead>
-                        <TableHead>Brand</TableHead>
-                        <TableHead>Unit Price</TableHead>
-                        <TableHead className="text-right">Stocks</TableHead>
-                        <TableHead></TableHead>
-                        <TableHead></TableHead>
-                        <TableHead></TableHead>
-                    </TableRow>
-                </TableHeader>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead className="w-[100px]">Item</TableHead>
+                            <TableHead>Brand</TableHead>
+                            <TableHead>Unit Price</TableHead>
+                            <TableHead className="text-right">Stocks</TableHead>
+                            <TableHead></TableHead>
+                            <TableHead></TableHead>
+                            <TableHead></TableHead>
+                        </TableRow>
+                    </TableHeader>
                     <ScrollArea className="h-[600px]">
-                      <BillPageProduct/>
+                        <BillPageProduct handleAdd={handleAdd} />
                     </ScrollArea>
                 </div>
                 <div className="p-8">
-                  <TableHeader>
+                    <TableHeader>
                         <TableRow>
-                        <TableHead>Item</TableHead>
-                        <TableHead>Count</TableHead>
-                        <TableHead>Unit Price</TableHead>
-                        <TableHead>Amount</TableHead>
-                        <TableHead></TableHead>
-                        <TableHead></TableHead>
-                        <TableHead className="text-right"></TableHead>
+                            <TableHead>Item</TableHead>
+                            <TableHead>Count</TableHead>
+                            <TableHead>Unit Price</TableHead>
+                            <TableHead>Amount</TableHead>
+                            <TableHead></TableHead>
+                            <TableHead></TableHead>
+                            <TableHead className="text-right"></TableHead>
                         </TableRow>
                     </TableHeader>
                     <ScrollArea className="h-[500px]">
-                      <BillPageList billItems={sampleBillItems} total={sampleTotal} />
+                        <BillPageList billItems={billItems} total={total} handleRemove={handleRemove} />
                     </ScrollArea>
                     <TableRow>
-                </TableRow>
-                <TableFooter>
-
+                    </TableRow>
+                    <TableFooter>
                         <TableRow>
-                        <TableCell className="text-right">
-                          <Button>Make Payment</Button>
-                        </TableCell>
+                            <TableCell className="text-right">
+                                <Button>Make Payment</Button>
+                            </TableCell>
                         </TableRow>
-                </TableFooter>
+                    </TableFooter>
                 </div>
             </div>
         </div>
-    )
+    );
 }
