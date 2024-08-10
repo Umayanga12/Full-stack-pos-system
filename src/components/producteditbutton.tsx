@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { fetchProductById } from "@/utils/productapi";
+import { fetchProductById, updateProduct } from "@/utils/productapi";
 import { useEffect, useState } from "react";
 import {
   Select,
@@ -78,7 +78,19 @@ export function ProductEditbutton({ productId }: EditProductButtonProps) {
   };
 
   const handleSaveChanges = async () => {
-    console.log("Save Changes", productData);
+    try {
+      const {brand,productName,price,stock} = productData;
+      const data = {
+        brand,
+        productName,
+        price: parseFloat(price),
+        stock:parseInt(stock)
+      }
+      //console.log(data)
+      await updateProduct(productId,data);
+    } catch (error) {
+      console.error("Error saving product changes:", error);
+    }
     // Implement save functionality here
   };
 

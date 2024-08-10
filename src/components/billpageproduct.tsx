@@ -77,7 +77,7 @@ export default function BillPageProduct() {
     return (
         <div>
             <Table>
-            
+
                 <TableBody>
                     {productdata.map((product, index) => (
                         <TableRow key={index}>
@@ -88,7 +88,6 @@ export default function BillPageProduct() {
                             <TableCell className="text-right">
                                 <div className="flex p-2 gap-2">
                                     <Button variant="outline" className="bg-blue-500 hover:bg-blue-600" onClick={() => handleAdd(product)}>+</Button>
-                                    <Button variant="outline" className="bg-red-500 hover:bg-red-600" onClick={() => handleRemove(product)}>-</Button>
                                 </div>
                             </TableCell>
                         </TableRow>

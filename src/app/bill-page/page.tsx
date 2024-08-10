@@ -40,6 +40,9 @@ export default function BillPage(){
                         <TableHead>Brand</TableHead>
                         <TableHead>Unit Price</TableHead>
                         <TableHead className="text-right">Stocks</TableHead>
+                        <TableHead></TableHead>
+                        <TableHead></TableHead>
+                        <TableHead></TableHead>
                     </TableRow>
                 </TableHeader>
                     <ScrollArea className="h-[600px]">
@@ -52,7 +55,10 @@ export default function BillPage(){
                         <TableHead>Item</TableHead>
                         <TableHead>Count</TableHead>
                         <TableHead>Unit Price</TableHead>
-                        <TableHead className="text-right">Amount</TableHead>
+                        <TableHead>Amount</TableHead>
+                        <TableHead></TableHead>
+                        <TableHead></TableHead>
+                        <TableHead className="text-right"></TableHead>
                         </TableRow>
                     </TableHeader>
                     <ScrollArea className="h-[500px]">

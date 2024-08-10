@@ -45,11 +45,10 @@ export const fetchProductById = async (id: string) => {
 export const updateProduct = async (id: string, updates: {
   name?: string;
   brand?: string;
-  category?: string;
   price?: number;
-  description?: string;
   stock?: number;
 }) => {
+  //console.log(updates)
   const options = {
     method: 'PUT',
     headers: {

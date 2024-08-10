@@ -34,6 +34,11 @@ export default function BillPageList({ billItems = [], total = 0 }: BillPageList
                         <TableCell>{item.count}</TableCell>
                         <TableCell>{item.price}</TableCell>
                         <TableCell className="text-right">${(item.count * item.price).toFixed(2)}</TableCell>
+                        <TableCell className="text-right">
+                                <div className="flex p-2 gap-2">
+                                    <Button variant="outline" className="bg-red-500 hover:bg-red-600" onClick={() => handleRemove(product)}>-</Button>
+                                </div>
+                        </TableCell>
                     </TableRow>
                 ))}
                 <TableRow>
