@@ -16,14 +16,16 @@ import { toast } from 'react-toastify';
 
 interface BrnadDeleteButtonprops{
   brandId: string;
+  onDelete: () => void;
 }
 
-export function BrandDeleteButton({brandId}:BrnadDeleteButtonprops) {
+export function BrandDeleteButton({brandId,onDelete}:BrnadDeleteButtonprops) {
   const handleDelete = async() => {
     try {
       //console.log(brandId);
       await deleteBrand(brandId)
       toast.success('Data successfully deleted!');
+      onDelete();
     } catch (error) {
       toast.error("Error Deleting the data");
       console.error("Error deleting data:", error);

@@ -35,7 +35,10 @@ const fetchBrandData = async () => {
 
 export function BrandDataEdit() {
   const [brandData, setBrandData] = useState([]);
-
+  const refreshData = async () => {
+    const data = await fetchBrandData();
+    setBrandData(data);
+  };
   useEffect(() => {
     const getData = async () => {
       const data = await fetchBrandData();
@@ -43,6 +46,7 @@ export function BrandDataEdit() {
     };
 
     getData();
+    refreshData();
   }, []);
 
   return (
@@ -62,7 +66,7 @@ export function BrandDataEdit() {
             <TableCell>{brand.contact}</TableCell>
             <TableCell>{brand.email}</TableCell>
             <TableCell className="text-right">
-              <BrandDeleteButton brandId={brand.brandId}/>
+              <BrandDeleteButton brandId={brand.brandId} onDelete={refreshData}/>
               <BrandEditButton brandId={brand.brandId}/>
             </TableCell>
           </TableRow>

@@ -79,6 +79,7 @@ const ProductAddForm: React.FC = () =>{
       //console.log("Product created successfully:", result);
       // You can reset the form or display a success message
       form.reset();
+
     } catch (error) {
       console.error("Error creating product:", error);
       // Display an error message to the user

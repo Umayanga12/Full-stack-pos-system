@@ -56,7 +56,7 @@ export function BrandAddForm() {
       const response = await createBrand("createbrands", brandData);
       if (response.ok) {
         const result = await response.json();
-        form.reset();
+
       } else {
         throw new Error("Failed to add brand details");
       }
@@ -64,6 +64,8 @@ export function BrandAddForm() {
       console.error("Error adding brand:", error);
       // Optionally, show an error message to the user
     }
+
+    form.reset();
   };
 
   return (

@@ -8,7 +8,8 @@ const Users : React.FC = () =>{
     return(
         <div className="flex">
             <NavBar/>
-            <div className="p-4">
+            <div className="p-10">
+            <h3 className="text-2xl font-bold pb-4">User Details</h3>
             <Tabs defaultValue="account">
             <TabsList>
                 <TabsTrigger value="account">Excisting Users</TabsTrigger>

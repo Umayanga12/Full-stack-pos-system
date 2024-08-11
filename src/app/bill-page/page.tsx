@@ -108,8 +108,7 @@ export default function BillPage() {
                     <ScrollArea className="h-[500px]">
                         <BillPageList billItems={billItems} total={total} handleRemove={handleRemove} />
                     </ScrollArea>
-                    <TableRow>
-                    </TableRow>
+
                     <TableFooter>
                         <TableRow>
                             <TableCell className="text-right">

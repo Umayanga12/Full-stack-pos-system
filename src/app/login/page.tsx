@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { z } from 'zod';
+import Image from "next/image"
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -65,42 +66,54 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div  className="flex min-h-screen flex-col items-center justify-between p-24 pt-44">
-      <Card className="w-[350px] bg-slate-300">
-      <CardHeader>
-        <CardTitle>Login</CardTitle>
-        <CardDescription>Welcome Back</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleLogin}>
-          <div className="grid w-full items-center gap-4">
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="username">Username</Label>
-              <Input
-                id="username"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                placeholder="Password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            {error && <p className="text-red-500">{error}</p>}
-          </div>
-          <CardFooter className="flex justify-between pt-4">
-            <Button type="submit" className="w-full">Login</Button>
-          </CardFooter>
-        </form>
-      </CardContent>
-    </Card>
+    <div className="flex min-h-screen">
+      <div className="w-1/2 relative">
+        <Image
+          src="/login.jpg"
+          alt="Login Image"
+          layout="fill"
+          objectFit="cover"
+        />
+      </div>
+      <div className="w-1/2 flex items-center justify-center">
+        <div className="w-[350px] bg-slate-300">
+          <Card>
+            <CardHeader>
+              <CardTitle>Login</CardTitle>
+              <CardDescription>Welcome Back</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleLogin}>
+                <div className="grid w-full items-center gap-4">
+                  <div className="flex flex-col space-y-1.5">
+                    <Label htmlFor="username">Username</Label>
+                    <Input
+                      id="username"
+                      placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                  </div>
+                  <div className="flex flex-col space-y-1.5">
+                    <Label htmlFor="password">Password</Label>
+                    <Input
+                      id="password"
+                      placeholder="Password"
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+                  {error && <p className="text-red-500">{error}</p>}
+                </div>
+                <CardFooter className="flex justify-between pt-4">
+                  <Button type="submit" className="w-full">Login</Button>
+                </CardFooter>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }

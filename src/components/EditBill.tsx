@@ -60,6 +60,7 @@ export function EditBill() {
   }, []);
 
   return (
+  <ScrollArea className="h-[600px]">
     <Table className="pt-4 min-h-full max-w-fit">
       {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
       <TableHeader>
@@ -110,5 +111,6 @@ export function EditBill() {
         </TableRow>
       </TableFooter> */}
     </Table>
+  </ScrollArea>
   );
 }
