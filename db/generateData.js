@@ -17,21 +17,21 @@ async function run() {
 
         // Insert users
         await users.insertMany([
-            { username: 'admin', password: 'hashed_password1', userid: 'user1', type: 'admin' },
-            { username: 'user', password: 'hashed_password2', userid: 'user2', type: 'user' }
+            { username: 'admin', password: '1234567890', type: 'admin' },
+            { username: 'user', password: '1234567890', type: 'user' }
         ]);
 
         // Insert products
         await products.insertMany([
-            { name: 'Laptop', brand: 'Brand A', category: 'Electronics', price: 1000, description: 'High performance laptop', stock: 50 },
-            { name: 'Smartphone', brand: 'Brand B', category: 'Electronics', price: 500, description: 'Latest model smartphone', stock: 100 },
-            { name: 'Tablet', brand: 'Brand C', category: 'Electronics', price: 300, description: '10 inch display tablet', stock: 200 }
+            { name: 'Laptop', brand: 'Brand A', price: 1000, stock: 50 },
+            { name: 'Smartphone', brand: 'Brand B',price: 500,stock: 100 },
+            { name: 'Tablet', brand: 'Brand C', price: 300, stock: 200 }
         ]);
 
         await brands.insertMany([
-            { brandID: 'brand1', brandName: 'Brand A', brandAgentEmail: 'brandA@mail.com', brandContact: '1234567890'},
-            { brandID: 'brand2', brandName: 'Brand B', brandAgentEmail: 'brandB@mail.com', brandContact: '1234567890'},
-            { brandID: 'brand3', brandName: 'Brand C', brandAgentEmail: 'brandC@mail.com', brandContact: '1234567890'}
+            { brandName: 'Brand A', brandAgentEmail: 'brandA@mail.com', brandContact: '1234567890'},
+            { brandName: 'Brand B', brandAgentEmail: 'brandB@mail.com', brandContact: '1234567890'},
+            { brandName: 'Brand C', brandAgentEmail: 'brandC@mail.com', brandContact: '1234567890'}
         ]);
 
         // Insert bills

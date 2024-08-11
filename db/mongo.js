@@ -14,13 +14,13 @@ use('pos');
 
 // Insert a few documents into the users collection.
 db.getCollection('users').insertMany([
-  { username: 'admin', password: 'hashed_password1', userid: 'user1', type: 'admin' },
-  { username: 'user', password: 'hashed_password2', userid: 'user2', type: 'user' }
+  { username: 'admin', password: '1234567890',type: 'admin' },
+  { username: 'user', password: '1234567890', type: 'user' }
 ]);
 
 // Insert a few documents into the products collection.
 db.getCollection('products').insertMany([
-  { name: 'Laptop', brand: 'Brand A', category: 'Electronics', price: 1000, description: 'High performance laptop', stock: 50 },
+  { name: 'Laptop', brand: 'Brand A', price: 1000, description: 'High performance laptop', stock: 50 },
   { name: 'Smartphone', brand: 'Brand B', category: 'Electronics', price: 500, description: 'Latest model smartphone', stock: 100 },
   { name: 'Tablet', brand: 'Brand C', category: 'Electronics', price: 300, description: '10 inch display tablet', stock: 200 }
 ]);
@@ -34,7 +34,6 @@ db.getCollection('brands').insertMany([
 // Insert a few documents into the bills collection.
 db.getCollection('bills').insertMany([
   {
-    userId: 'user2',
     items: [
       { productId: 'product1', content: 'Laptop', price: 1000 },
       { productId: 'product2', content: 'Smartphone', price: 500 }
