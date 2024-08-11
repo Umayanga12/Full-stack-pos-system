@@ -24,7 +24,7 @@ This project is a Full Stack POS (Point of Sale) system developed using Next.js 
 Clone the repository and navigate to the project directory:
 
 ```bash
-git clone [https://github.com/your-username/your-repo-name.git](https://github.com/Umayanga12/Full-stack-pos-system.git)
+git clone https://github.com/Umayanga12/Full-stack-pos-system.git
 cd Full-stack-pos-system
 ```
 
